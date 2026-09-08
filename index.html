@@ -26,6 +26,8 @@
   --rule-2:#C4C4C1;
   --accent:#16171A;
   --accent-wash:#E8E8E6;
+  --link:#1A4FA0;
+  --good:#1B7A4B;
   --focus:#1F6FEB;
 
   --f-sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
@@ -46,6 +48,8 @@
     --rule-2:#3A3C3F;
     --accent:#EDEDEB;
     --accent-wash:#232426;
+    --link:#8CB8F7;
+    --good:#5CC48F;
     --focus:#5C9DFF;
   }
 }
@@ -59,6 +63,8 @@
   --rule-2:#3A3C3F;
   --accent:#EDEDEB;
   --accent-wash:#232426;
+  --link:#8CB8F7;
+  --good:#5CC48F;
   --focus:#5C9DFF;
 }
 
@@ -85,7 +91,7 @@ a{color:inherit}
 .nav-links{display:flex;align-items:center;gap:1.75rem}
 .nav-links a{font:400 .875rem/1 var(--f-sans);color:var(--ink-2);text-decoration:none;
   transition:color .25s cubic-bezier(.16,1,.3,1)}
-.nav-links a:hover{color:var(--accent)}
+.nav-links a:hover{color:var(--link)}
 .tgl{font:500 .75rem/1 var(--f-mono);color:var(--ink-2);background:none;border:1px solid var(--rule-2);
   border-radius:0;padding:.45rem .6rem;cursor:pointer;transition:.25s cubic-bezier(.16,1,.3,1)}
 .tgl:hover{color:var(--ink);border-color:var(--ink-3)}
@@ -138,16 +144,16 @@ a{color:inherit}
 .cred{text-align:left;font:400 .8125rem/1.6 var(--f-mono);color:var(--ink-3)}
 @media (min-width:56rem){.cred{text-align:right}}
 .cred .grade{display:block;margin-top:.15rem;font:600 1.0625rem/1.3 var(--f-mono);
-  color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+  color:var(--good);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .job p{color:var(--ink-2);font-size:.9688rem;max-width:52ch}
 .job-aside{display:grid;gap:1.25rem;align-content:start}
 .stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem 1.5rem}
 .stack .k{font:400 .75rem/1.35 var(--f-mono);color:var(--ink-3);margin-bottom:.2rem}
 .stack .v{font:500 .875rem/1.35 var(--f-mono);color:var(--ink)}
 .job-links{display:flex;flex-wrap:wrap;gap:1.25rem}
-.job-links a{font:500 .875rem/1 var(--f-sans);color:var(--accent);text-decoration:none;
-  border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .25s cubic-bezier(.16,1,.3,1)}
-.job-links a:hover{border-color:var(--accent)}
+.job-links a{font:500 .875rem/1 var(--f-sans);color:var(--link);text-decoration:none;
+  border-bottom:1px solid currentColor;padding-bottom:3px;transition:opacity .25s cubic-bezier(.16,1,.3,1)}
+.job-links a:hover{opacity:.65}
 
 /* experience: timeline rows, date rail on the left */
 .xp{display:grid}
@@ -173,16 +179,17 @@ th,td{text-align:left;padding:.55rem 1rem .55rem 0;border-bottom:1px solid var(-
 th{font:400 .8125rem/1.4 var(--f-mono);color:var(--ink-3);font-weight:400}
 td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;
   padding-right:0;color:var(--ink)}
-td.num b{font-weight:600}
+td.num b{font-weight:600;color:var(--good)}
 
 /* contact */
 .contact{padding:var(--gap-sec) 0 clamp(3rem,6vw,4.5rem);border-top:1px solid var(--rule)}
 .contact h2{font:600 clamp(1.75rem,3.6vw,2.5rem)/1.15 var(--f-sans);letter-spacing:-.018em;max-width:20ch}
 .contact p{margin-top:1rem;color:var(--ink-2);max-width:44ch}
 .reach{display:flex;flex-wrap:wrap;gap:2rem;margin-top:2.5rem;align-items:center}
-.reach a.plain{font:400 .9375rem/1 var(--f-mono);color:var(--ink-2);text-decoration:none;
-  transition:color .25s cubic-bezier(.16,1,.3,1)}
-.reach a.plain:hover{color:var(--accent)}
+.reach a.plain{font:400 .9375rem/1 var(--f-mono);color:var(--link);text-decoration:underline;
+  text-decoration-thickness:1px;text-underline-offset:4px;
+  transition:opacity .25s cubic-bezier(.16,1,.3,1)}
+.reach a.plain:hover{opacity:.65}
 .foot{margin-top:4rem;padding-top:1.25rem;border-top:1px solid var(--rule);
   font:400 .8125rem/1.5 var(--f-mono);color:var(--ink-3)}
 
@@ -213,8 +220,8 @@ td.num b{font-weight:600}
     <a class="mark" href="#main">Edna Iusupova</a>
     <nav class="nav-links" aria-label="Sections">
       <a href="#experience">Experience</a>
-      <a href="#work">Work</a>
       <a href="#education">Education</a>
+      <a href="#work">Work</a>
       <a href="#contact">Contact</a>
       <button class="tgl" id="theme" type="button" aria-label="Switch colour theme">theme</button>
     </nav>
@@ -324,6 +331,50 @@ td.num b{font-weight:600}
     </div>
   </section>
 
+  <section class="sec" id="education">
+    <h2 class="sec-t">Education</h2>
+
+    <div class="edu">
+      <div>
+        <div class="deg">
+          <h3>M2 Distributed and Parallel Computing</h3>
+          <p class="m">Universite Paris-Saclay, 2026 to 2027</p>
+          <p>Parallel architectures, distributed systems and high-performance computing,
+          concluding with a six-month research project.</p>
+        </div>
+        <div class="deg">
+          <h3>M1 Quantum and Distributed Computer Science</h3>
+          <p class="m">Universite Paris-Saclay, 2025 to 2026</p>
+          <p>Parallel and distributed computing, machine learning and quantum information,
+          taught and examined in English and French.</p>
+        </div>
+        <div class="deg">
+          <h3>BSc Computer Software Engineering</h3>
+          <p class="m">ITMO University, Saint Petersburg, 2019 to 2023</p>
+        </div>
+      </div>
+
+      <div class="tablewrap">
+        <table>
+          <caption>Selected results, M1 2025 to 2026</caption>
+          <thead>
+            <tr><th scope="col">Course</th><th scope="col" style="text-align:right">Grade</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Research project (TER)</td><td class="num"><b>19.00</b></td></tr>
+            <tr><td>MPI programming</td><td class="num"><b>18.00</b></td></tr>
+            <tr><td>Advanced C++ programming</td><td class="num"><b>17.67</b></td></tr>
+            <tr><td>Hands-on machine learning</td><td class="num"><b>16.26</b></td></tr>
+            <tr><td>High-performance computing</td><td class="num">14.00</td></tr>
+            <tr><td>Robust distributed algorithms</td><td class="num">13.10</td></tr>
+            <tr><td>Hands-on NLP</td><td class="num">13.10</td></tr>
+            <tr><td>Discrete systems optimisation</td><td class="num">13.00</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
   <section class="sec" id="work">
     <h2 class="sec-t">Selected work</h2>
     <div class="work">
@@ -410,50 +461,6 @@ td.num b{font-weight:600}
         </div>
       </article>
 
-    </div>
-  </section>
-
-  <section class="sec" id="education">
-    <h2 class="sec-t">Education</h2>
-
-    <div class="edu">
-      <div>
-        <div class="deg">
-          <h3>M2 Distributed and Parallel Computing</h3>
-          <p class="m">Universite Paris-Saclay, 2026 to 2027</p>
-          <p>Parallel architectures, distributed systems and high-performance computing,
-          concluding with a six-month research project.</p>
-        </div>
-        <div class="deg">
-          <h3>M1 Quantum and Distributed Computer Science</h3>
-          <p class="m">Universite Paris-Saclay, 2025 to 2026</p>
-          <p>Parallel and distributed computing, machine learning and quantum information,
-          taught and examined in English and French.</p>
-        </div>
-        <div class="deg">
-          <h3>BSc Computer Software Engineering</h3>
-          <p class="m">ITMO University, Saint Petersburg, 2019 to 2023</p>
-        </div>
-      </div>
-
-      <div class="tablewrap">
-        <table>
-          <caption>Selected results, M1 2025 to 2026</caption>
-          <thead>
-            <tr><th scope="col">Course</th><th scope="col" style="text-align:right">Grade</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Research project (TER)</td><td class="num"><b>19.00</b></td></tr>
-            <tr><td>MPI programming</td><td class="num"><b>18.00</b></td></tr>
-            <tr><td>Advanced C++ programming</td><td class="num"><b>17.67</b></td></tr>
-            <tr><td>Hands-on machine learning</td><td class="num">16.26</td></tr>
-            <tr><td>High-performance computing</td><td class="num">14.00</td></tr>
-            <tr><td>Robust distributed algorithms</td><td class="num">13.10</td></tr>
-            <tr><td>Hands-on NLP</td><td class="num">13.10</td></tr>
-            <tr><td>Discrete systems optimisation</td><td class="num">13.00</td></tr>
-          </tbody>
-        </table>
-      </div>
     </div>
   </section>
 
