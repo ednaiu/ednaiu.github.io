@@ -1,0 +1,61 @@
+# Edna Iusupova
+
+> Engineer working on the evaluation of AI-generated code, kernel optimisation and
+> benchmarking. Based in the Paris region, France. Site: https://ednaiu.github.io/
+
+## Who
+
+Edna Iusupova is an engineer based in the Paris region, France. She is enrolled in the
+M2 Distributed and Parallel Computing (DiPaC) programme at Universite Paris-Saclay for
+2026 to 2027, after the M1 Quantum and Distributed Computer Science programme at the same
+university, and holds a BSc in Software Engineering (Neurotechnologies and Programming)
+from ITMO University in Saint Petersburg. She completed the Gray Scott School 2026, a
+56-hour European HPC summer school on programming and optimisation for heterogeneous
+architectures, organised by LAPP and CC-FR under the EuroHPC Joint Undertaking.
+
+She has four years of professional experience across four companies while studying,
+currently designing AI workflows and tooling for an e-commerce back office engineering
+group: MCP servers connecting issue tracking, wiki, GitLab, SAP and test management,
+agent skills, and controlled trials that decide which approaches a team adopts.
+
+## Research interests
+
+- Evaluation of AI-generated code: where model-written code loses to a tuned reference,
+  by how much, and what that implies for review.
+- Autotuning and performance modelling: Bayesian optimisation, gradient descent and
+  simulated annealing over tiling, blocking and threading parameters.
+- Empirical study of AI agents in the engineering process.
+
+## Selected work
+
+- TrustGate, a merge gate scoring Python against the defect profile of generated code.
+  Benchmarked on 245 samples against bandit, semgrep, ruff and flake8: 0.854 recall on
+  the generative-defect slice against 0.341 for the next best tool, precision 1.000, zero
+  false positives across 74 clean samples. https://github.com/ednaiu/TrustGate
+- AI-Driven BLAS Library, a master's research project graded 19/20, supervised by Oguz
+  Kaya. AVX2 microkernels with FMA, cache tiling, OpenMP threading and autotuned search,
+  measured against OpenBLAS on a 20-core workstation.
+  https://github.com/ednaiu/2526-m1qdcs-terhpc
+- Cloud GPU Compiler, a published VS Code extension compiling and running CUDA on remote
+  GPUs through the Compiler Explorer API.
+  https://marketplace.visualstudio.com/items?itemName=EdnaIusupova.cuda-cloud-compiler
+- Flood Map Prediction, a preprocessing pipeline harmonising ERA5 climate series with 13
+  static environmental layers and satellite flood labels.
+  https://github.com/ednaiu/Flood-Prediction-Starting-Kit
+
+## Skills
+
+Python, PyTorch, C, C++, CUDA, SQL, TypeScript, Bash. Hugging Face Transformers,
+scikit-learn, NumPy, pandas, Docker, MCP, OpenMP, MPI, AVX2 intrinsics, CMake, Git,
+GitLab, Linux, Kafka, REST, Jira, Confluence, SAP. Benchmarking and profiling,
+autotuning, Bayesian optimisation, experiment design, BPMN, UML.
+
+## Languages
+
+English C1 (Certificate in Advanced English), Russian native, French A2.
+
+## Contact
+
+edna.iusupova@universite-paris-saclay.fr
+https://github.com/ednaiu
+https://www.linkedin.com/in/ednaiu/
