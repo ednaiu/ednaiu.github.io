@@ -11,25 +11,25 @@
 <meta property="og:description" content="Compute kernel optimisation, autotuning and benchmarking. M2 Distributed and Parallel Computing at Universite Paris-Saclay.">
 <meta property="og:url" content="https://ednaiu.github.io/">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23A0501A'/%3E%3Cpath d='M7 22V10h4.6c3 0 4.9 2.3 4.9 6s-1.9 6-4.9 6H7Zm2.7-2.3h1.7c1.6 0 2.5-1.3 2.5-3.7s-.9-3.7-2.5-3.7H9.7v7.4Z' fill='%23fff'/%3E%3Cpath d='M18.5 22v-2.5l4-6.9h-4V10h7.2v2.5l-4 6.9h4V22h-7.2Z' fill='%23fff' opacity='.6'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2316171A'/%3E%3Cpath d='M7 22V10h4.6c3 0 4.9 2.3 4.9 6s-1.9 6-4.9 6H7Zm2.7-2.3h1.7c1.6 0 2.5-1.3 2.5-3.7s-.9-3.7-2.5-3.7H9.7v7.4Z' fill='%23fff'/%3E%3Cpath d='M18.5 22v-2.5l4-6.9h-4V10h7.2v2.5l-4 6.9h4V22h-7.2Z' fill='%23fff' opacity='.6'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <style>
 :root{
-  --ground:#F3F5F6;
-  --surface:#FBFCFC;
-  --ink:#12171C;
-  --ink-2:#4E5964;
-  --ink-3:#7A848E;
-  --rule:#DCE1E5;
-  --rule-2:#C2CAD1;
-  --accent:#A0501A;
-  --accent-wash:#EFE6DE;
+  --ground:#F4F4F3;
+  --surface:#FCFCFB;
+  --ink:#16171A;
+  --ink-2:#5A5C61;
+  --ink-3:#87898F;
+  --rule:#DEDEDC;
+  --rule-2:#C4C4C1;
+  --accent:#16171A;
+  --accent-wash:#E8E8E6;
   --focus:#1F6FEB;
 
-  --f-sans:"Geist","Helvetica Neue",Arial,sans-serif;
-  --f-mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --f-sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
 
   --shell:76rem;
   --pad:clamp(1.25rem,4vw,3rem);
@@ -37,21 +37,29 @@
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --ground:#0F1418;
-    --surface:#161C21;
-    --ink:#E9EDF0;
-    --ink-2:#9AA5AE;
-    --ink-3:#767F88;
-    --rule:#232A31;
-    --rule-2:#333C45;
-    --accent:#E0913F;
-    --accent-wash:#261E15;
+    --ground:#121314;
+    --surface:#191A1C;
+    --ink:#EDEDEB;
+    --ink-2:#A0A2A6;
+    --ink-3:#7A7C80;
+    --rule:#282A2C;
+    --rule-2:#3A3C3F;
+    --accent:#EDEDEB;
+    --accent-wash:#232426;
     --focus:#5C9DFF;
   }
 }
 :root[data-theme="dark"]{
-  --ground:#0F1418; --surface:#161C21; --ink:#E9EDF0; --ink-2:#9AA5AE; --ink-3:#767F88;
-  --rule:#232A31; --rule-2:#333C45; --accent:#E0913F; --accent-wash:#261E15; --focus:#5C9DFF;
+  --ground:#121314;
+  --surface:#191A1C;
+  --ink:#EDEDEB;
+  --ink-2:#A0A2A6;
+  --ink-3:#7A7C80;
+  --rule:#282A2C;
+  --rule-2:#3A3C3F;
+  --accent:#EDEDEB;
+  --accent-wash:#232426;
+  --focus:#5C9DFF;
 }
 
 *{box-sizing:border-box}
@@ -86,17 +94,17 @@ a{color:inherit}
 /* ---------------- hero ---------------- */
 .hero{padding:clamp(3rem,8vw,5.5rem) 0 clamp(2.5rem,5vw,3.5rem)}
 .kicker{font:500 .8125rem/1.4 var(--f-mono);color:var(--accent);margin-bottom:1.5rem}
-.hero h1{font:600 clamp(2.25rem,5.4vw,3.4rem)/1.08 var(--f-sans);letter-spacing:-.035em;max-width:21ch}
+.hero h1{font:600 clamp(2.25rem,5.4vw,3.4rem)/1.08 var(--f-sans);letter-spacing:-.02em;max-width:21ch}
 .hero .sub{margin-top:1.25rem;font-size:1.0625rem;line-height:1.55;color:var(--ink-2);max-width:46ch}
 .cta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2.25rem}
 .btn{display:inline-flex;align-items:center;white-space:nowrap;border-radius:0;
   font:500 .9375rem/1 var(--f-sans);padding:.85rem 1.5rem;text-decoration:none;
   transition:background .25s cubic-bezier(.16,1,.3,1),border-color .25s,transform .12s}
 .btn:active{transform:translateY(1px)}
-.btn-primary{background:var(--accent);color:#FBFCFC;border:1px solid var(--accent)}
-.btn-primary:hover{background:transparent;color:var(--accent)}
+.btn-primary{background:var(--ink);color:var(--ground);border:1px solid var(--ink)}
+.btn-primary:hover{background:transparent;color:var(--ink)}
 .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--rule-2)}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-ghost:hover{border-color:var(--ink);color:var(--ink)}
 
 /* identity strip, under the hero */
 .ident{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:1.75rem 2.5rem;
@@ -107,12 +115,12 @@ a{color:inherit}
 
 /* ---------------- sections ---------------- */
 .sec{padding:var(--gap-sec) 0}
-.sec-t{font:600 clamp(1.5rem,3vw,2rem)/1.15 var(--f-sans);letter-spacing:-.025em;margin-bottom:2.75rem}
+.sec-t{font:600 clamp(1.5rem,3vw,2rem)/1.15 var(--f-sans);letter-spacing:-.015em;margin-bottom:2.75rem}
 
 /* focus: asymmetric 7/5 split, not three equal cards */
 .focus{display:grid;grid-template-columns:1fr;gap:2rem}
 @media (min-width:56rem){.focus{grid-template-columns:7fr 5fr;gap:3.5rem}}
-.f-lead h3{font:600 1.375rem/1.25 var(--f-sans);letter-spacing:-.02em;margin-bottom:.75rem}
+.f-lead h3{font:600 1.375rem/1.25 var(--f-sans);letter-spacing:-.012em;margin-bottom:.75rem}
 .f-lead p{color:var(--ink-2);font-size:1rem;max-width:44ch}
 .f-side{display:grid;gap:1.75rem;align-content:start}
 .f-side h3{font:600 1.0625rem/1.3 var(--f-sans);margin-bottom:.4rem}
@@ -123,7 +131,14 @@ a{color:inherit}
 .job{padding:2.5rem 0;display:grid;grid-template-columns:1fr;gap:1.5rem}
 .job + .job{border-top:1px solid var(--rule)}
 @media (min-width:56rem){.job{grid-template-columns:7fr 5fr;gap:3.5rem}}
-.job h3{font:600 1.5rem/1.2 var(--f-sans);letter-spacing:-.025em;margin-bottom:.9rem}
+.job-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem 2rem;
+  flex-wrap:wrap;margin-bottom:1.25rem}
+@media (min-width:56rem){.job-head{grid-column:1 / -1}}
+.job h3{font:600 1.5rem/1.2 var(--f-sans);letter-spacing:-.015em}
+.cred{text-align:left;font:400 .8125rem/1.6 var(--f-mono);color:var(--ink-3)}
+@media (min-width:56rem){.cred{text-align:right}}
+.cred .grade{display:block;margin-top:.15rem;font:600 1.0625rem/1.3 var(--f-mono);
+  color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .job p{color:var(--ink-2);font-size:.9688rem;max-width:52ch}
 .job-aside{display:grid;gap:1.25rem;align-content:start}
 .stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem 1.5rem}
@@ -134,23 +149,25 @@ a{color:inherit}
   border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .25s cubic-bezier(.16,1,.3,1)}
 .job-links a:hover{border-color:var(--accent)}
 
-/* education: featured metrics, then grouped rest */
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:1.5rem 2.5rem;
-  padding-top:1.5rem;border-top:1px solid var(--rule)}
-.tile .n{font:500 clamp(2.25rem,5vw,3rem)/1 var(--f-mono);letter-spacing:-.04em;
-  color:var(--accent);font-variant-numeric:tabular-nums}
-.tile .l{margin-top:.6rem;font-size:.9375rem;color:var(--ink-2);line-height:1.4}
-.rest{margin-top:2rem;font-size:.9375rem;color:var(--ink-2);max-width:64ch;line-height:1.7}
-.rest b{font:500 .9375rem var(--f-mono);color:var(--ink);font-variant-numeric:tabular-nums}
-.degrees{display:grid;gap:2rem;margin-top:3.5rem}
-@media (min-width:56rem){.degrees{grid-template-columns:1fr 1fr;gap:3.5rem}}
+/* education: degrees beside the full results table */
+.edu{display:grid;grid-template-columns:1fr;gap:2.5rem}
+@media (min-width:56rem){.edu{grid-template-columns:1fr 1fr;gap:3.5rem}}
+.deg + .deg{margin-top:1.75rem}
 .deg h3{font:600 1.0625rem/1.35 var(--f-sans);margin-bottom:.35rem}
 .deg .m{font:400 .8125rem/1.5 var(--f-mono);color:var(--ink-3);margin-bottom:.5rem}
 .deg p{color:var(--ink-2);font-size:.9375rem;max-width:42ch}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.9375rem}
+caption{text-align:left;font:400 .8125rem/1.4 var(--f-mono);color:var(--ink-3);padding-bottom:.9rem}
+th,td{text-align:left;padding:.55rem 1rem .55rem 0;border-bottom:1px solid var(--rule);white-space:nowrap}
+th{font:400 .8125rem/1.4 var(--f-mono);color:var(--ink-3);font-weight:400}
+td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;
+  padding-right:0;color:var(--ink)}
+td.num b{font-weight:600}
 
 /* contact */
 .contact{padding:var(--gap-sec) 0 clamp(3rem,6vw,4.5rem);border-top:1px solid var(--rule)}
-.contact h2{font:600 clamp(1.75rem,3.6vw,2.5rem)/1.15 var(--f-sans);letter-spacing:-.03em;max-width:20ch}
+.contact h2{font:600 clamp(1.75rem,3.6vw,2.5rem)/1.15 var(--f-sans);letter-spacing:-.018em;max-width:20ch}
 .contact p{margin-top:1rem;color:var(--ink-2);max-width:44ch}
 .reach{display:flex;flex-wrap:wrap;gap:2rem;margin-top:2.5rem;align-items:center}
 .reach a.plain{font:400 .9375rem/1 var(--f-mono);color:var(--ink-2);text-decoration:none;
@@ -250,8 +267,15 @@ a{color:inherit}
     <div class="work">
 
       <article class="job">
-        <div>
+        <div class="job-head">
           <h3>AI-Driven BLAS Library</h3>
+          <p class="cred">
+        <span>Research project (TER), Paris-Saclay</span><br>
+        <span>Supervised by Oguz Kaya</span><br>
+        <span class="grade">Graded 19/20</span>
+          </p>
+        </div>
+        <div>
           <p>A multithreaded BLAS implementation built to rival OpenBLAS, where an AI assistant
           writes the kernels and I build the optimisation methodology around them: AVX2 microkernels
           with FMA, cache tiling, autotuned parameter search, and coverage across levels 1 to 3.</p>
@@ -271,8 +295,14 @@ a{color:inherit}
       </article>
 
       <article class="job">
-        <div>
+        <div class="job-head">
           <h3>Cloud GPU Compiler</h3>
+          <p class="cred">
+        <span>VS Code extension</span><br>
+        <span>Published on the Marketplace</span><br>
+          </p>
+        </div>
+        <div>
           <p>A published VS Code extension that compiles and runs CUDA on remote GPUs through the
           Compiler Explorer API. A developer on a machine with no NVIDIA card can still build and
           execute single files and full CMake projects, with no local toolchain.</p>
@@ -293,8 +323,14 @@ a{color:inherit}
       </article>
 
       <article class="job">
-        <div>
+        <div class="job-head">
           <h3>Stance Detection in Conversations</h3>
+          <p class="cred">
+        <span>Applied NLP</span><br>
+        <span>RumourEval framing</span><br>
+          </p>
+        </div>
+        <div>
           <p>Four-way stance classification over source and reply pairs, comparing five approaches
           from a TF-IDF baseline through sentence embeddings and cross-encoder scoring to a
           confidence-based ensemble, packaged for inference.</p>
@@ -318,27 +354,39 @@ a{color:inherit}
   <section class="sec" id="education">
     <h2 class="sec-t">Education</h2>
 
-    <div class="tiles">
-      <div class="tile"><p class="n">19.0</p><p class="l">Research project (TER)</p></div>
-      <div class="tile"><p class="n">18.0</p><p class="l">MPI programming</p></div>
-      <div class="tile"><p class="n">17.7</p><p class="l">Advanced C++</p></div>
-    </div>
-    <p class="rest">Graded out of 20 in the first master year. Also machine learning <b>16.3</b>,
-    high-performance computing <b>14.0</b>, robust distributed algorithms <b>13.1</b>,
-    natural language processing <b>13.1</b>, and discrete systems optimisation <b>13.0</b>.</p>
-
-    <div class="degrees">
-      <div class="deg">
-        <h3>M2 Distributed and Parallel Computing</h3>
-        <p class="m">Universite Paris-Saclay, 2026 to 2027</p>
-        <p>Parallel architectures, distributed systems and high-performance computing,
-        concluding with a six-month research project.</p>
+    <div class="edu">
+      <div>
+        <div class="deg">
+          <h3>M2 Distributed and Parallel Computing</h3>
+          <p class="m">Universite Paris-Saclay, 2026 to 2027</p>
+          <p>Parallel architectures, distributed systems and high-performance computing,
+          concluding with a six-month research project.</p>
+        </div>
+        <div class="deg">
+          <h3>M1 Quantum and Distributed Computer Science</h3>
+          <p class="m">Universite Paris-Saclay, 2025 to 2026</p>
+          <p>Parallel and distributed computing, machine learning and quantum information,
+          taught and examined in English and French.</p>
+        </div>
       </div>
-      <div class="deg">
-        <h3>M1 Quantum and Distributed Computer Science</h3>
-        <p class="m">Universite Paris-Saclay, 2025 to 2026</p>
-        <p>Parallel and distributed computing, machine learning and quantum information,
-        taught and examined in English and French.</p>
+
+      <div class="tablewrap">
+        <table>
+          <caption>Selected results, M1 2025 to 2026</caption>
+          <thead>
+            <tr><th scope="col">Course</th><th scope="col" style="text-align:right">Grade</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Research project (TER)</td><td class="num"><b>19.00</b></td></tr>
+            <tr><td>MPI programming</td><td class="num"><b>18.00</b></td></tr>
+            <tr><td>Advanced C++ programming</td><td class="num"><b>17.67</b></td></tr>
+            <tr><td>Hands-on machine learning</td><td class="num">16.26</td></tr>
+            <tr><td>High-performance computing</td><td class="num">14.00</td></tr>
+            <tr><td>Robust distributed algorithms</td><td class="num">13.10</td></tr>
+            <tr><td>Hands-on NLP</td><td class="num">13.10</td></tr>
+            <tr><td>Discrete systems optimisation</td><td class="num">13.00</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
