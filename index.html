@@ -344,6 +344,37 @@ td.num b{font-weight:600;color:var(--good)}
 
       <article class="job">
         <div class="job-head">
+          <h3>TrustGate</h3>
+          <p class="cred">
+        <span>Quality gate for generated Python</span><br>
+        <span>Benchmarked against four static analysers</span><br>
+        <span class="grade">0.854 recall vs 0.341</span>
+          </p>
+        </div>
+        <div>
+          <p>A merge gate scoring Python against the defect profile of model-written code:
+          hallucinated imports and APIs, invented keyword arguments, stub implementations,
+          hard-coded filler values. It returns an explainable trust score and a verdict a CI
+          pipeline can act on. The point of the project is the measurement: on a corpus of 245
+          samples it is compared against bandit, semgrep, ruff and flake8, and on the slice that
+          matters, generated-code defects, it recalls 0.854 against 0.341 for the next best tool,
+          at full precision and no false positives across the 74 clean samples.</p>
+        </div>
+        <div class="job-aside">
+          <div class="stack">
+            <div><p class="k">Corpus</p><p class="v">245 samples</p></div>
+            <div><p class="k">Precision</p><p class="v">1.000</p></div>
+            <div><p class="k">False positives</p><p class="v">0 of 74 clean</p></div>
+            <div><p class="k">Output</p><p class="v">SARIF, CI verdict</p></div>
+          </div>
+          <div class="job-links">
+            <a href="https://github.com/ednaiu/TrustGate">Repository</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="job">
+        <div class="job-head">
           <h3>AI-Driven BLAS Library</h3>
           <p class="cred">
         <span>Research project (TER), Paris-Saclay</span><br>
