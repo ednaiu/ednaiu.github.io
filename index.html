@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edna Iusupova — AI-assisted HPC</title>
+<meta name="description" content="M2 Quantum and Distributed Computer Science at Universite Paris-Saclay. Kernel optimisation, autotuning and benchmarking, with AI writing the code and measurement deciding whether it is faster. Seeking a 6-month research internship, March 2027.">
+<link rel="canonical" href="https://ednaiu.github.io/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Edna Iusupova — AI-assisted HPC">
+<meta property="og:description" content="Kernel optimisation, autotuning and benchmarking, with AI writing the code and measurement deciding whether it is faster. Seeking a 6-month research internship, March 2027, Paris or hybrid.">
+<meta property="og:url" content="https://ednaiu.github.io/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23B85C11'/%3E%3Cpath d='M8 21V11h4.2c2.6 0 4.3 1.9 4.3 5s-1.7 5-4.3 5H8Zm2.4-2h1.6c1.4 0 2.1-1.1 2.1-3s-.7-3-2.1-3h-1.6v6Z' fill='%23fff'/%3E%3Cpath d='M19 21v-2.3l3.4-4.4H19V11h6.6v2.3L22.2 18H26v3h-7Z' fill='%23fff' opacity='.65'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#F5F7F9;
+  --surface:#FFFFFF;
+  --ink:#111720;
+  --ink-soft:#55606F;
+  --ink-faint:#7D8797;
+  --rule:#DCE2E9;
+  --rule-strong:#C3CCD6;
+  --accent:#A9520C;
+  --accent-soft:#F3E4D5;
+  --signal:#0D6663;
+  --focus:#1F6FEB;
+
+  --f-display:"IBM Plex Sans Condensed","Helvetica Neue",Arial,sans-serif;
+  --f-body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+
+  --measure:64ch;
+  --pad:clamp(1.25rem,4vw,2.5rem);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0D1116;
+    --surface:#141A21;
+    --ink:#E7ECF2;
+    --ink-soft:#9BA6B4;
+    --ink-faint:#78838F;
+    --rule:#242C36;
+    --rule-strong:#36404C;
+    --accent:#E9963F;
+    --accent-soft:#2A1F14;
+    --signal:#4EBAB2;
+    --focus:#5C9DFF;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0D1116;
+  --surface:#141A21;
+  --ink:#E7ECF2;
+  --ink-soft:#9BA6B4;
+  --ink-faint:#78838F;
+  --rule:#242C36;
+  --rule-strong:#36404C;
+  --accent:#E9963F;
+  --accent-soft:#2A1F14;
+  --signal:#4EBAB2;
+  --focus:#5C9DFF;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font:400 16px/1.65 var(--f-body);
+  font-feature-settings:"kern" 1;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--ink);text-underline-offset:3px;text-decoration-thickness:1px;text-decoration-color:var(--rule-strong)}
+a:hover{text-decoration-color:var(--accent)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:2px}
+
+.skip{position:absolute;left:-9999px;top:0;background:var(--surface);color:var(--ink);padding:.6rem 1rem;z-index:20}
+.skip:focus{left:.5rem;top:.5rem}
+
+.wrap{max-width:70rem;margin:0 auto;padding:0 var(--pad)}
+
+/* ---------- masthead ---------- */
+.masthead{border-bottom:1px solid var(--rule);background:var(--surface)}
+.masthead .bar{display:flex;align-items:baseline;justify-content:space-between;gap:1.5rem;padding:1.1rem 0;flex-wrap:wrap}
+.wordmark{font:700 1.0625rem/1 var(--f-display);letter-spacing:.01em;text-decoration:none}
+.wordmark span{color:var(--accent)}
+.masthead nav{display:flex;gap:1.25rem;align-items:baseline;flex-wrap:wrap}
+.masthead nav a{font:500 .8125rem/1 var(--f-mono);color:var(--ink-soft);text-decoration:none;letter-spacing:.02em}
+.masthead nav a:hover{color:var(--accent)}
+.tbtn{font:500 .8125rem/1 var(--f-mono);color:var(--ink-soft);background:none;border:1px solid var(--rule);
+  border-radius:2px;padding:.4rem .55rem;cursor:pointer}
+.tbtn:hover{border-color:var(--rule-strong);color:var(--ink)}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(2.75rem,7vw,4.75rem) 0 clamp(2rem,5vw,3rem)}
+.eyebrow{font:500 .75rem/1 var(--f-mono);letter-spacing:.11em;text-transform:uppercase;color:var(--accent);margin:0 0 1.1rem}
+.hero h1{
+  font:700 clamp(2.1rem,5.6vw,3.5rem)/1.06 var(--f-display);
+  letter-spacing:-.015em;margin:0 0 1.25rem;text-wrap:balance;max-width:22ch;
+}
+.lede{font-size:clamp(1.0625rem,1.9vw,1.1875rem);line-height:1.6;color:var(--ink-soft);max-width:var(--measure);margin:0}
+.lede strong{color:var(--ink);font-weight:500}
+
+/* availability + links */
+.hero-foot{display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));gap:0;margin-top:2.5rem;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.slot{padding:1.15rem 1.5rem 1.15rem 0;border-right:1px solid var(--rule)}
+.slot:last-child{border-right:0}
+.slot dt{font:500 .6875rem/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 .5rem}
+.slot dd{margin:0;font-size:.9375rem;line-height:1.5}
+.slot dd .mono{font-family:var(--f-mono);font-size:.875rem;font-variant-numeric:tabular-nums}
+.linkrow{display:flex;flex-wrap:wrap;gap:.35rem 1rem}
+.linkrow a{font:500 .875rem/1.5 var(--f-mono);text-decoration:none;color:var(--ink);border-bottom:1px solid var(--rule-strong)}
+.linkrow a:hover{color:var(--accent);border-color:var(--accent)}
+
+/* ---------- sections ---------- */
+section{padding:clamp(2.75rem,6vw,4rem) 0;border-bottom:1px solid var(--rule)}
+.sechead{display:flex;align-items:baseline;gap:1rem;margin:0 0 2rem}
+.sechead h2{font:700 1.375rem/1.2 var(--f-display);letter-spacing:-.005em;margin:0;white-space:nowrap}
+.sechead .rule{flex:1;height:1px;background:var(--rule)}
+.sechead .count{font:500 .75rem/1 var(--f-mono);color:var(--ink-faint);letter-spacing:.08em}
+
+/* focus areas — hairline list, not cards */
+.areas{display:grid;gap:0;margin:0}
+.area{display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr);gap:.5rem 2.5rem;
+  padding:1.4rem 0;border-top:1px solid var(--rule)}
+.area:last-child{border-bottom:1px solid var(--rule)}
+.area h3{font:600 1rem/1.35 var(--f-body);margin:0;color:var(--ink)}
+.area p{margin:0;color:var(--ink-soft);font-size:.9375rem;max-width:58ch}
+
+code{font:400 .875em/1 var(--f-mono);background:var(--accent-soft);color:var(--ink);
+  padding:.12em .35em;border-radius:2px}
+
+/* projects */
+.projects{display:grid;gap:0}
+.project{padding:1.9rem 0;border-top:1px solid var(--rule)}
+.project:last-child{border-bottom:1px solid var(--rule)}
+.p-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem 1.5rem;flex-wrap:wrap;margin-bottom:.7rem}
+.p-head h3{font:700 1.3125rem/1.25 var(--f-display);margin:0;letter-spacing:-.005em}
+.p-role{font:500 .75rem/1.4 var(--f-mono);color:var(--ink-faint);letter-spacing:.03em;text-align:right}
+.p-role .grade{color:var(--accent)}
+.project p{margin:0 0 1.1rem;color:var(--ink-soft);max-width:var(--measure);font-size:.9688rem}
+.specs{display:flex;flex-wrap:wrap;gap:.4rem .5rem;margin-bottom:.9rem;padding-left:.9rem;border-left:2px solid var(--accent-soft)}
+.spec{font:400 .8125rem/1.5 var(--f-mono);color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.spec::after{content:"·";margin-left:.55rem;color:var(--rule-strong)}
+.spec:last-child::after{content:""}
+.p-links{display:flex;flex-wrap:wrap;gap:.35rem 1.1rem}
+.p-links a{font:500 .8125rem/1.5 var(--f-mono);text-decoration:none;color:var(--accent);border-bottom:1px solid transparent}
+.p-links a:hover{border-color:var(--accent)}
+
+/* education / results */
+.edu{display:grid;grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));gap:2.5rem}
+.degree{border-top:1px solid var(--rule);padding-top:1.1rem}
+.degree h3{font:600 1rem/1.35 var(--f-body);margin:0 0 .3rem}
+.degree .meta{font:400 .8125rem/1.5 var(--f-mono);color:var(--ink-faint);margin:0 0 .6rem;font-variant-numeric:tabular-nums}
+.degree p{margin:0;color:var(--ink-soft);font-size:.9375rem}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.9375rem}
+caption{text-align:left;font:500 .6875rem/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-faint);padding-bottom:.85rem}
+th,td{text-align:left;padding:.55rem 1rem .55rem 0;border-bottom:1px solid var(--rule);white-space:nowrap}
+th{font:500 .75rem/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:500}
+td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;padding-right:0;color:var(--ink)}
+td.num b{font-weight:600;color:var(--accent)}
+
+/* languages */
+.langs{display:flex;flex-wrap:wrap;gap:0 2.5rem}
+.lang{padding:1rem 0;border-top:1px solid var(--rule);min-width:9rem;flex:1}
+.lang dt{font:400 .9375rem/1.4 var(--f-body);color:var(--ink)}
+.lang dd{margin:.25rem 0 0;font:500 .875rem/1.4 var(--f-mono);color:var(--accent);font-variant-numeric:tabular-nums}
+
+/* footer */
+footer{padding:clamp(2.5rem,6vw,3.5rem) 0 4rem}
+footer h2{font:700 1.5rem/1.25 var(--f-display);margin:0 0 .75rem;max-width:24ch;text-wrap:balance}
+footer p{margin:0 0 1.5rem;color:var(--ink-soft);max-width:var(--measure)}
+.colophon{margin-top:3rem;padding-top:1.1rem;border-top:1px solid var(--rule);
+  font:400 .75rem/1.6 var(--f-mono);color:var(--ink-faint);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+
+@media (max-width:44rem){
+  .area{grid-template-columns:1fr;gap:.4rem}
+  .slot{border-right:0;border-bottom:1px solid var(--rule);padding-right:0}
+  .hero-foot .slot:last-child{border-bottom:0}
+  .p-role{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{
+  .masthead nav,.tbtn,.skip{display:none}
+  body{background:#fff;color:#000;font-size:11pt}
+  section{border-bottom:1px solid #ccc;padding:1rem 0}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap bar">
+    <a class="wordmark" href="#main">Edna Iusupova<span>.</span></a>
+    <nav aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#focus">Focus</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+      <button class="tbtn" id="theme" type="button" aria-label="Switch colour theme">theme</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+
+  <div class="hero">
+    <p class="eyebrow">Paris-Saclay · M2 Quantum &amp; Distributed Computer Science</p>
+    <h1>Kernels the AI writes, performance I can prove.</h1>
+    <p class="lede">
+      I work on the measurement side of high-performance computing: <strong>benchmarking, autotuning
+      and kernel optimisation</strong>. Increasingly a code model writes the first version of the kernel,
+      which makes the interesting question no longer how to write it, but how to establish whether it
+      is actually faster than the library it means to replace.
+    </p>
+
+    <dl class="hero-foot">
+      <div class="slot">
+        <dt>Available for</dt>
+        <dd>Six-month M2 research internship<br><span class="mono">March – September 2027</span></dd>
+      </div>
+      <div class="slot">
+        <dt>Based in</dt>
+        <dd>Paris region, France<br><span class="mono">on-site, hybrid or remote</span></dd>
+      </div>
+      <div class="slot">
+        <dt>Elsewhere</dt>
+        <dd class="linkrow">
+          <a href="https://github.com/ednaiu">GitHub</a>
+          <a href="https://www.linkedin.com/in/ednaiu/">LinkedIn</a>
+          <a href="mailto:edna.iusupova@universite-paris-saclay.fr">Email</a>
+        </dd>
+      </div>
+    </dl>
+  </div>
+
+  <section id="focus">
+    <div class="sechead"><h2>What I work on</h2><span class="rule"></span><span class="count">03</span></div>
+    <div class="areas">
+      <div class="area">
+        <h3>AI-assisted kernel engineering</h3>
+        <p>Using code models to generate and refine compute kernels, then holding the output to a
+        benchmark rather than to an impression. The methodology around the generation is the work.</p>
+      </div>
+      <div class="area">
+        <h3>Autotuning and measurement</h3>
+        <p>Searching tiling, blocking and threading parameters with Bayesian optimisation, gradient
+        descent and simulated annealing, and building the reproducible timing harness that decides
+        which point in that space wins.</p>
+      </div>
+      <div class="area">
+        <h3>Applied machine learning and evaluation</h3>
+        <p>Transformer baselines, ensembling and per-class diagnostics on classification tasks, with
+        the same bias toward evaluation that I bring to performance work.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="sechead"><h2>Selected work</h2><span class="rule"></span><span class="count">03</span></div>
+    <div class="projects">
+
+      <article class="project">
+        <div class="p-head">
+          <h3>AI-Driven BLAS Library</h3>
+          <p class="p-role">Research project (TER) · Paris-Saclay<br>Supervised by Oguz Kaya · graded <span class="grade">19/20</span></p>
+        </div>
+        <p>
+          A multithreaded BLAS implementation built to rival OpenBLAS, in which the kernels are produced
+          with an AI coding assistant and my contribution is the optimisation methodology around them:
+          AVX2 microkernels with FMA, cache tiling, autotuned parameter search, and coverage across
+          BLAS levels 1 to 3, each measured against the reference implementation.
+        </p>
+        <!-- TODO: once you have the figure, add a spec below, e.g. <span class="spec">xx GFLOP/s SGEMM</span> -->
+        <div class="specs">
+          <span class="spec">C</span>
+          <span class="spec">AVX2 + FMA</span>
+          <span class="spec">OpenMP</span>
+          <span class="spec">20-core Intel</span>
+          <span class="spec">reference: OpenBLAS</span>
+        </div>
+        <div class="p-links"><a href="https://github.com/ednaiu/2526-m1qdcs-terhpc">Repository</a></div>
+      </article>
+
+      <article class="project">
+        <div class="p-head">
+          <h3>Cloud GPU Compiler</h3>
+          <p class="p-role">VS Code extension · published<br>Visual Studio Marketplace</p>
+        </div>
+        <p>
+          Compiles and runs CUDA on remote GPUs through the Compiler Explorer API, so a developer on a
+          machine with no NVIDIA card — a Mac, for instance — can still build and execute <code>.cu</code>
+          files and full CMake projects with no local toolchain, and read the output in the editor.
+        </p>
+        <div class="specs">
+          <span class="spec">TypeScript</span>
+          <span class="spec">CUDA</span>
+          <span class="spec">nvcc via Compiler Explorer</span>
+          <span class="spec">CMake projects</span>
+        </div>
+        <div class="p-links">
+          <a href="https://marketplace.visualstudio.com/items?itemName=EdnaIusupova.cuda-cloud-compiler">Marketplace</a>
+          <!-- TODO: publish the source and link it here -->
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="p-head">
+          <h3>Stance Detection in Conversations</h3>
+          <p class="p-role">Applied NLP<br>RumourEval framing</p>
+        </div>
+        <p>
+          Four-way stance classification — support, deny, query, comment — over source-and-reply
+          conversation pairs. Five approaches compared, from a TF-IDF baseline through sentence
+          embeddings and cross-encoder scoring to a confidence-based ensemble, packaged for inference
+          and reported with macro F1 and per-class diagnostics.
+        </p>
+        <div class="specs">
+          <span class="spec">Python</span>
+          <span class="spec">transformers</span>
+          <span class="spec">5 model variants</span>
+          <span class="spec">macro F1</span>
+        </div>
+        <div class="p-links"><a href="https://github.com/ednaiu/Stance-detection-NLP">Repository</a></div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="sechead"><h2>Education</h2><span class="rule"></span><span class="count">Paris-Saclay</span></div>
+
+    <div class="edu">
+      <div>
+        <div class="degree">
+          <h3>M2 Quantum and Distributed Computer Science</h3>
+          <p class="meta">Universite Paris-Saclay · 2026 – 2027 · in progress</p>
+          <p>Second year of the QDCS track, concluding with the six-month research internship
+          this page is written for.</p>
+        </div>
+        <div class="degree" style="margin-top:1.75rem">
+          <h3>M1 Quantum and Distributed Computer Science</h3>
+          <p class="meta">Universite Paris-Saclay · 2025 – 2026 · completed</p>
+          <p>Parallel and distributed computing, high-performance computing, machine learning and
+          quantum information, taught and examined in English and French.</p>
+        </div>
+      </div>
+
+      <div class="tablewrap">
+        <table>
+          <caption>Selected results, M1 2025–2026</caption>
+          <thead>
+            <tr><th scope="col">Course</th><th scope="col" style="text-align:right">Grade</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Research project (TER)</td><td class="num"><b>19.00</b></td></tr>
+            <tr><td>MPI programming</td><td class="num"><b>18.00</b></td></tr>
+            <tr><td>Advanced C++ programming</td><td class="num"><b>17.67</b></td></tr>
+            <tr><td>Hands-on machine learning</td><td class="num">16.26</td></tr>
+            <tr><td>High-performance computing</td><td class="num">14.00</td></tr>
+            <tr><td>Robust distributed algorithms</td><td class="num">13.10</td></tr>
+            <tr><td>Hands-on NLP</td><td class="num">13.10</td></tr>
+            <tr><td>Modelling &amp; optimisation of discrete systems</td><td class="num">13.00</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <dl class="langs" style="margin-top:2.5rem">
+      <div class="lang"><dt>English</dt><dd>C1 · working language</dd></div>
+      <div class="lang"><dt>Russian</dt><dd>native</dd></div>
+      <div class="lang"><dt>French</dt><dd>A2 · improving</dd></div>
+    </dl>
+  </section>
+
+</div>
+
+<footer id="contact">
+  <div class="wrap">
+    <p class="eyebrow">Get in touch</p>
+    <h2>Looking for a team where measurement decides the argument.</h2>
+    <p>
+      I am looking for a six-month internship from March 2027 in GPU, HPC or applied machine learning,
+      in an English-speaking team in the Paris region or remote. If your team works on kernels,
+      inference performance or developer tooling, I would like to hear about it.
+    </p>
+    <div class="linkrow">
+      <a href="mailto:edna.iusupova@universite-paris-saclay.fr">edna.iusupova@universite-paris-saclay.fr</a>
+      <a href="https://www.linkedin.com/in/ednaiu/">linkedin.com/in/ednaiu</a>
+      <a href="https://github.com/ednaiu">github.com/ednaiu</a>
+    </div>
+    <div class="colophon">
+      <span>Edna Iusupova — Paris, France</span>
+      <span>Set in IBM Plex</span>
+    </div>
+  </div>
+</footer>
+</main>
+
+<script>
+(function(){
+  var root=document.documentElement,btn=document.getElementById("theme"),KEY="theme";
+  try{var s=localStorage.getItem(KEY); if(s){root.setAttribute("data-theme",s);}}catch(e){}
+  btn.addEventListener("click",function(){
+    var dark=window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var cur=root.getAttribute("data-theme")||(dark?"dark":"light");
+    var next=cur==="dark"?"light":"dark";
+    root.setAttribute("data-theme",next);
+    try{localStorage.setItem(KEY,next);}catch(e){}
+  });
+})();
+</script>
+</body>
+</html>
