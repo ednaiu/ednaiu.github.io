@@ -17,198 +17,215 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <style>
 :root{
-  --ground:#F4F4F3;
-  --surface:#FCFCFB;
-  --ink:#16171A;
-  --ink-2:#5A5C61;
-  --ink-3:#87898F;
-  --rule:#DEDEDC;
-  --rule-2:#C4C4C1;
-  --accent:#16171A;
-  --accent-wash:#E8E8E6;
+  --ground:#EFF1F3;
+  --shell:rgba(255,255,255,.55);
+  --shell-ring:rgba(16,18,22,.06);
+  --core:#FBFCFD;
+  --ink:#111316;
+  --ink-2:#565B62;
+  --ink-3:#878D95;
+  --hair:rgba(16,18,22,.07);
   --link:#1A4FA0;
   --good:#1B7A4B;
   --focus:#1F6FEB;
+  --amb:0 1px 2px rgba(16,18,22,.04), 0 10px 30px -12px rgba(16,18,22,.10), 0 30px 70px -30px rgba(16,18,22,.14);
+  --inset:inset 0 1px 0 rgba(255,255,255,.9);
 
-  --f-sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --f-sans:"IBM Plex Sans","Segoe UI",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --ease:cubic-bezier(.32,.72,0,1);
 
-  --shell:76rem;
-  --pad:clamp(1.25rem,4vw,3rem);
-  --gap-sec:clamp(3.5rem,8vw,6.5rem);
+  --r-out:2rem;
+  --r-in:calc(2rem - .4rem);
+  --shell-pad:.4rem;
+  --shell-w:76rem;
+  --pad:clamp(1.1rem,4vw,2.5rem);
+  --sec:clamp(6rem,12vw,10rem);
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --ground:#121314;
-    --surface:#191A1C;
-    --ink:#EDEDEB;
-    --ink-2:#A0A2A6;
-    --ink-3:#7A7C80;
-    --rule:#282A2C;
-    --rule-2:#3A3C3F;
-    --accent:#EDEDEB;
-    --accent-wash:#232426;
+    --ground:#0A0B0D;
+    --shell:rgba(255,255,255,.045);
+    --shell-ring:rgba(255,255,255,.09);
+    --core:#131519;
+    --ink:#ECEEF1;
+    --ink-2:#9AA1A9;
+    --ink-3:#737A82;
+    --hair:rgba(255,255,255,.08);
     --link:#8CB8F7;
     --good:#5CC48F;
     --focus:#5C9DFF;
+    --amb:0 1px 2px rgba(0,0,0,.5), 0 14px 40px -14px rgba(0,0,0,.7);
+    --inset:inset 0 1px 0 rgba(255,255,255,.06);
   }
 }
 :root[data-theme="dark"]{
-  --ground:#121314;
-  --surface:#191A1C;
-  --ink:#EDEDEB;
-  --ink-2:#A0A2A6;
-  --ink-3:#7A7C80;
-  --rule:#282A2C;
-  --rule-2:#3A3C3F;
-  --accent:#EDEDEB;
-  --accent-wash:#232426;
-  --link:#8CB8F7;
-  --good:#5CC48F;
-  --focus:#5C9DFF;
+  --ground:#0A0B0D; --shell:rgba(255,255,255,.045); --shell-ring:rgba(255,255,255,.09);
+  --core:#131519; --ink:#ECEEF1; --ink-2:#9AA1A9; --ink-3:#737A82; --hair:rgba(255,255,255,.08);
+  --link:#8CB8F7; --good:#5CC48F; --focus:#5C9DFF;
+  --amb:0 1px 2px rgba(0,0,0,.5), 0 14px 40px -14px rgba(0,0,0,.7);
+  --inset:inset 0 1px 0 rgba(255,255,255,.06);
 }
 
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{
-  margin:0;background:var(--ground);color:var(--ink);
-  font:400 16px/1.6 var(--f-sans);-webkit-font-smoothing:antialiased;
-}
-h1,h2,h3{text-wrap:balance;margin:0}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font:400 16px/1.65 var(--f-sans);-webkit-font-smoothing:antialiased}
+h1,h2,h3{margin:0;text-wrap:balance}
 p{margin:0}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
-.skip{position:absolute;left:-9999px;background:var(--surface);padding:.6rem 1rem;z-index:30}
-.skip:focus{left:.5rem;top:.5rem}
-.shell{max-width:var(--shell);margin:0 auto;padding:0 var(--pad)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:4px;border-radius:6px}
+.skip{position:absolute;left:-9999px;background:var(--core);padding:.7rem 1.1rem;border-radius:999px;z-index:60}
+.skip:focus{left:1rem;top:1rem}
+.shell{max-width:var(--shell-w);margin:0 auto;padding:0 var(--pad)}
 
-/* ---------------- nav ---------------- */
-.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--ground) 88%,transparent);
-  backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
-.nav-in{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;height:68px}
-.mark{font:700 1rem/1 var(--f-sans);letter-spacing:-.02em;text-decoration:none}
-.nav-links{display:flex;align-items:center;gap:1.75rem}
-.nav-links a{font:400 .875rem/1 var(--f-sans);color:var(--ink-2);text-decoration:none;
-  transition:color .25s cubic-bezier(.16,1,.3,1)}
-.nav-links a:hover{color:var(--link)}
-.tgl{font:500 .75rem/1 var(--f-mono);color:var(--ink-2);background:none;border:1px solid var(--rule-2);
-  border-radius:0;padding:.45rem .6rem;cursor:pointer;transition:.25s cubic-bezier(.16,1,.3,1)}
-.tgl:hover{color:var(--ink);border-color:var(--ink-3)}
-.tgl:active{transform:translateY(1px)}
+/* ---------- floating island nav ---------- */
+.nav{position:sticky;top:0;z-index:40;padding:1.25rem var(--pad) 0;pointer-events:none}
+.nav-in{pointer-events:auto;width:max-content;max-width:100%;margin:0 auto;display:flex;
+  align-items:center;gap:1.5rem;padding:.55rem .55rem .55rem 1.35rem;border-radius:999px;
+  background:var(--shell);backdrop-filter:blur(20px) saturate(1.6);
+  -webkit-backdrop-filter:blur(20px) saturate(1.6);
+  box-shadow:var(--amb),var(--inset);border:1px solid var(--shell-ring)}
+.mark{font:600 .9375rem/1 var(--f-sans);letter-spacing:-.02em;text-decoration:none;white-space:nowrap}
+.nav-links{display:flex;align-items:center;gap:1.35rem}
+.nav-links a{font:400 .8125rem/1 var(--f-sans);color:var(--ink-2);text-decoration:none;
+  transition:color .7s var(--ease)}
+.nav-links a:hover{color:var(--ink)}
+.tgl{font:500 .6875rem/1 var(--f-mono);color:var(--ink-2);background:var(--shell);
+  border:1px solid var(--shell-ring);border-radius:999px;padding:.5rem .8rem;cursor:pointer;
+  transition:transform .7s var(--ease),color .7s var(--ease)}
+.tgl:hover{color:var(--ink)}
+.tgl:active{transform:scale(.96)}
 
-/* ---------------- hero ---------------- */
-.hero{padding:clamp(3rem,8vw,5.5rem) 0 clamp(2.5rem,5vw,3.5rem)}
-.kicker{font:500 .8125rem/1.4 var(--f-mono);color:var(--accent);margin-bottom:1.5rem}
-.hero h1{font:600 clamp(2.25rem,5.4vw,3.4rem)/1.08 var(--f-sans);letter-spacing:-.02em;max-width:21ch}
-.hero .sub{margin-top:1.25rem;font-size:1.0625rem;line-height:1.55;color:var(--ink-2);max-width:46ch}
+/* ---------- hero: editorial split ---------- */
+.hero{padding:clamp(4rem,10vw,7rem) 0 clamp(3rem,6vw,4.5rem);
+  display:grid;grid-template-columns:1fr;gap:2.5rem}
+@media (min-width:60rem){.hero{grid-template-columns:1.15fr .85fr;gap:4rem;align-items:end}}
+.pill{display:inline-block;border-radius:999px;padding:.42rem .95rem;
+  background:var(--shell);border:1px solid var(--shell-ring);box-shadow:var(--inset);
+  font:500 10px/1.4 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2);
+  margin-bottom:1.75rem}
+.hero h1{font:600 clamp(2.6rem,6.4vw,4.4rem)/1.02 var(--f-sans);letter-spacing:-.045em;max-width:15ch}
+.hero .sub{font-size:1.0625rem;line-height:1.6;color:var(--ink-2);max-width:42ch}
 .cta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2.25rem}
-.btn{display:inline-flex;align-items:center;white-space:nowrap;border-radius:0;
-  font:500 .9375rem/1 var(--f-sans);padding:.85rem 1.5rem;text-decoration:none;
-  transition:background .25s cubic-bezier(.16,1,.3,1),border-color .25s,transform .12s}
-.btn:active{transform:translateY(1px)}
-.btn-primary{background:var(--ink);color:var(--ground);border:1px solid var(--ink)}
-.btn-primary:hover{background:transparent;color:var(--ink)}
-.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--rule-2)}
-.btn-ghost:hover{border-color:var(--ink);color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:.6rem;border-radius:999px;text-decoration:none;
+  font:500 .9375rem/1 var(--f-sans);padding:.6rem .6rem .6rem 1.5rem;border:1px solid transparent;
+  transition:transform .7s var(--ease),background .7s var(--ease),color .7s var(--ease)}
+.btn:active{transform:scale(.98)}
+.btn .ico{width:2rem;height:2rem;border-radius:999px;display:grid;place-items:center;
+  font-size:.8125rem;transition:transform .7s var(--ease)}
+.btn:hover .ico{transform:translate(3px,-2px) scale(1.06)}
+.btn-primary{background:var(--ink);color:var(--ground)}
+.btn-primary .ico{background:rgba(255,255,255,.14)}
+.btn-ghost{background:var(--shell);color:var(--ink);border-color:var(--shell-ring);
+  box-shadow:var(--inset);padding:.6rem 1.5rem}
 
-/* identity strip, under the hero */
-.ident{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:1.75rem 2.5rem;
-  padding:1.75rem 0;border-top:1px solid var(--rule)}
-.ident .k{font:400 .75rem/1.4 var(--f-mono);color:var(--ink-3);margin-bottom:.4rem}
-.ident .v{font-size:.9375rem;line-height:1.45;color:var(--ink)}
+/* ---------- double bezel ---------- */
+.bez{background:var(--shell);border:1px solid var(--shell-ring);border-radius:var(--r-out);
+  padding:var(--shell-pad);box-shadow:var(--amb)}
+.core{background:var(--core);border-radius:var(--r-in);box-shadow:var(--inset);
+  padding:clamp(1.5rem,3.5vw,2.5rem)}
+
+/* ---------- identity strip ---------- */
+.ident{display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:2rem 2.5rem}
+.ident .k{font:500 10px/1.4 var(--f-mono);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:.5rem}
+.ident .v{font-size:.9375rem;line-height:1.5}
 .ident .v em{font-style:normal;color:var(--ink-2)}
 
-/* ---------------- sections ---------------- */
-.sec{padding:var(--gap-sec) 0}
-.sec-t{font:600 clamp(1.5rem,3vw,2rem)/1.15 var(--f-sans);letter-spacing:-.015em;margin-bottom:2.75rem}
+/* ---------- sections ---------- */
+.sec{padding:var(--sec) 0}
+.sec-t{font:600 clamp(1.9rem,4vw,2.9rem)/1.1 var(--f-sans);letter-spacing:-.035em;margin-bottom:3.5rem}
 
-/* focus: asymmetric 7/5 split, not three equal cards */
-.focus{display:grid;grid-template-columns:1fr;gap:2rem}
-@media (min-width:56rem){.focus{grid-template-columns:7fr 5fr;gap:3.5rem}}
-.f-lead h3{font:600 1.375rem/1.25 var(--f-sans);letter-spacing:-.012em;margin-bottom:.75rem}
-.f-lead p{color:var(--ink-2);font-size:1rem;max-width:44ch}
-.f-side{display:grid;gap:1.75rem;align-content:start}
-.f-side h3{font:600 1.0625rem/1.3 var(--f-sans);margin-bottom:.4rem}
+.focus{display:grid;grid-template-columns:1fr;gap:2.5rem}
+@media (min-width:60rem){.focus{grid-template-columns:1.1fr .9fr;gap:4rem}}
+.f-lead h3{font:600 1.5rem/1.2 var(--f-sans);letter-spacing:-.025em;margin-bottom:1rem}
+.f-lead p{color:var(--ink-2);max-width:44ch}
+.f-side{display:grid;gap:2.25rem;align-content:start}
+.f-side h3{font:600 1.0625rem/1.3 var(--f-sans);margin-bottom:.5rem}
 .f-side p{color:var(--ink-2);font-size:.9375rem;max-width:40ch}
 
-/* work: stacked rows, one hairline between, asymmetric inner grid */
-.work{display:grid}
-.job{padding:2.5rem 0;display:grid;grid-template-columns:1fr;gap:1.5rem}
-.job + .job{border-top:1px solid var(--rule)}
-@media (min-width:56rem){.job{grid-template-columns:7fr 5fr;gap:3.5rem}}
+/* ---------- projects ---------- */
+.work{display:grid;gap:1.5rem}
+.job{display:grid;grid-template-columns:1fr;gap:1.75rem}
+@media (min-width:60rem){.job{grid-template-columns:1.15fr .85fr;gap:3.5rem}}
 .job-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem 2rem;
   flex-wrap:wrap;margin-bottom:1.25rem}
-@media (min-width:56rem){.job-head{grid-column:1 / -1}}
-.job h3{font:600 1.5rem/1.2 var(--f-sans);letter-spacing:-.015em}
-.cred{text-align:left;font:400 .8125rem/1.6 var(--f-mono);color:var(--ink-3)}
-@media (min-width:56rem){.cred{text-align:right}}
-.cred .grade{display:block;margin-top:.15rem;font:600 1.0625rem/1.3 var(--f-mono);
-  color:var(--good);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+@media (min-width:60rem){.job-head{grid-column:1 / -1}}
+.job h3{font:600 1.6rem/1.15 var(--f-sans);letter-spacing:-.03em}
+.cred{font:400 .8125rem/1.7 var(--f-mono);color:var(--ink-3);text-align:left}
+@media (min-width:60rem){.cred{text-align:right}}
+.cred .grade{display:block;margin-top:.2rem;font:600 1.0625rem/1.3 var(--f-mono);color:var(--good);
+  font-variant-numeric:tabular-nums}
 .job p{color:var(--ink-2);font-size:.9688rem;max-width:52ch}
-.job-aside{display:grid;gap:1.25rem;align-content:start}
-.stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem 1.5rem}
-.stack .k{font:400 .75rem/1.35 var(--f-mono);color:var(--ink-3);margin-bottom:.2rem}
-.stack .v{font:500 .875rem/1.35 var(--f-mono);color:var(--ink)}
+.job-aside{display:grid;gap:1.5rem;align-content:start}
+.stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.15rem 1.5rem}
+.stack .k{font:400 10px/1.4 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:.3rem}
+.stack .v{font:500 .875rem/1.35 var(--f-mono);color:var(--ink);font-variant-numeric:tabular-nums}
 .job-links{display:flex;flex-wrap:wrap;gap:1.25rem}
 .job-links a{font:500 .875rem/1 var(--f-sans);color:var(--link);text-decoration:none;
-  border-bottom:1px solid currentColor;padding-bottom:3px;transition:opacity .25s cubic-bezier(.16,1,.3,1)}
-.job-links a:hover{opacity:.65}
+  border-bottom:1px solid currentColor;padding-bottom:3px;transition:opacity .7s var(--ease)}
+.job-links a:hover{opacity:.6}
 
-/* experience: timeline rows, date rail on the left */
-.xp{display:grid}
-.xp-row{display:grid;grid-template-columns:1fr;gap:.6rem;padding:1.6rem 0}
-.xp-row + .xp-row{border-top:1px solid var(--rule)}
-@media (min-width:56rem){.xp-row{grid-template-columns:11rem 1fr;gap:3rem}}
-.xp-when{font:400 .8125rem/1.5 var(--f-mono);color:var(--ink-3);font-variant-numeric:tabular-nums}
-.xp-what h3{font:600 1.0625rem/1.35 var(--f-sans);margin-bottom:.15rem}
-.xp-co{font:400 .8125rem/1.5 var(--f-mono);color:var(--ink-3);margin-bottom:.5rem}
+/* ---------- experience ---------- */
+.xp{display:grid;gap:1.25rem}
+.xp-row{display:grid;grid-template-columns:1fr;gap:.6rem}
+@media (min-width:60rem){.xp-row{grid-template-columns:10rem 1fr;gap:3rem}}
+.xp-when{font:400 .8125rem/1.6 var(--f-mono);color:var(--ink-3);font-variant-numeric:tabular-nums}
+.xp-what h3{font:600 1.125rem/1.3 var(--f-sans);letter-spacing:-.015em;margin-bottom:.2rem}
+.xp-co{font:400 .8125rem/1.6 var(--f-mono);color:var(--ink-3);margin-bottom:.7rem}
 .xp-what p{color:var(--ink-2);font-size:.9375rem;max-width:56ch}
 
-/* education: degrees beside the full results table */
+/* ---------- education ---------- */
 .edu{display:grid;grid-template-columns:1fr;gap:2.5rem}
-@media (min-width:56rem){.edu{grid-template-columns:1fr 1fr;gap:3.5rem}}
-.deg + .deg{margin-top:1.75rem}
+@media (min-width:60rem){.edu{grid-template-columns:1fr 1fr;gap:4rem}}
+.deg + .deg{margin-top:2rem}
 .deg h3{font:600 1.0625rem/1.35 var(--f-sans);margin-bottom:.35rem}
-.deg .m{font:400 .8125rem/1.5 var(--f-mono);color:var(--ink-3);margin-bottom:.5rem}
+.deg .m{font:400 .8125rem/1.6 var(--f-mono);color:var(--ink-3);margin-bottom:.55rem}
 .deg p{color:var(--ink-2);font-size:.9375rem;max-width:42ch}
+.hl{font-family:var(--f-mono);font-weight:600;color:var(--good);font-variant-numeric:tabular-nums}
 .tablewrap{overflow-x:auto}
 table{border-collapse:collapse;width:100%;font-size:.9375rem}
-caption{text-align:left;font:400 .8125rem/1.4 var(--f-mono);color:var(--ink-3);padding-bottom:.9rem}
-th,td{text-align:left;padding:.55rem 1rem .55rem 0;border-bottom:1px solid var(--rule);white-space:nowrap}
-th{font:400 .8125rem/1.4 var(--f-mono);color:var(--ink-3);font-weight:400}
-td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;
-  padding-right:0;color:var(--ink)}
+caption{text-align:left;font:400 10px/1.4 var(--f-mono);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-3);padding-bottom:1.1rem}
+th,td{text-align:left;padding:.6rem 1rem .6rem 0;border-bottom:1px solid var(--hair);white-space:nowrap}
+th{font:400 10px/1.4 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:400}
+td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;padding-right:0}
 td.num b{font-weight:600;color:var(--good)}
-.hl{font-family:var(--f-mono);font-weight:600;color:var(--good);font-variant-numeric:tabular-nums}
 
-/* contact */
-.contact{padding:var(--gap-sec) 0 clamp(3rem,6vw,4.5rem);border-top:1px solid var(--rule)}
-.contact h2{font:600 clamp(1.75rem,3.6vw,2.5rem)/1.15 var(--f-sans);letter-spacing:-.018em;max-width:20ch}
-.contact p{margin-top:1rem;color:var(--ink-2);max-width:44ch}
-.reach{display:flex;flex-wrap:wrap;gap:2rem;margin-top:2.5rem;align-items:center}
+/* ---------- contact ---------- */
+.contact{padding:var(--sec) 0 clamp(4rem,8vw,6rem)}
+.contact h2{font:600 clamp(2rem,4.4vw,3.2rem)/1.08 var(--f-sans);letter-spacing:-.04em;max-width:18ch}
+.contact p{margin-top:1.25rem;color:var(--ink-2);max-width:44ch}
+.reach{display:flex;flex-wrap:wrap;gap:1.75rem;margin-top:2.75rem;align-items:center}
 .reach a.plain{font:400 .9375rem/1 var(--f-mono);color:var(--link);text-decoration:underline;
-  text-decoration-thickness:1px;text-underline-offset:4px;
-  transition:opacity .25s cubic-bezier(.16,1,.3,1)}
-.reach a.plain:hover{opacity:.65}
-.foot{margin-top:4rem;padding-top:1.25rem;border-top:1px solid var(--rule);
-  font:400 .8125rem/1.5 var(--f-mono);color:var(--ink-3)}
+  text-decoration-thickness:1px;text-underline-offset:5px;transition:opacity .7s var(--ease)}
+.reach a.plain:hover{opacity:.6}
+.foot{margin-top:4.5rem;padding-top:1.5rem;border-top:1px solid var(--hair);
+  font:400 .8125rem/1.6 var(--f-mono);color:var(--ink-3)}
 
-/* motion: load-in cascade only, transform + opacity */
-@media (prefers-reduced-motion:no-preference){
-  .rise{animation:rise .7s cubic-bezier(.16,1,.3,1) both}
-  .d1{animation-delay:.05s}.d2{animation-delay:.13s}.d3{animation-delay:.21s}.d4{animation-delay:.29s}
-  @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+/* ---------- motion ---------- */
+.reveal{opacity:1;transform:none;filter:none}
+html.js .reveal{opacity:0;transform:translateY(3rem);filter:blur(8px);
+  transition:opacity .9s var(--ease),transform .9s var(--ease),filter .9s var(--ease)}
+html.js .reveal.in{opacity:1;transform:none;filter:none}
+@media (prefers-reduced-motion:reduce){
+  html.js .reveal{opacity:1!important;transform:none!important;filter:none!important;transition:none}
 }
 
-@media (max-width:38rem){
+@media (max-width:48rem){
   .stack{grid-template-columns:1fr}
-  .nav-links{gap:1.1rem}
-  .nav-links a{font-size:.8125rem}
+  .nav-in{gap:.9rem;padding-left:1rem}
+  .nav-links{gap:.9rem}
+  .nav-links a{font-size:.75rem}
 }
 @media print{
   .nav,.tgl,.skip,.cta-row{display:none}
   body{background:#fff;color:#000;font-size:11pt}
+  .bez{box-shadow:none;border:0;padding:0}
+  .core{box-shadow:none;padding:0}
   .sec{padding:1.25rem 0}
 }
 </style>
@@ -251,12 +268,13 @@ td.num b{font-weight:600;color:var(--good)}
   ]
 }
 </script>
+<script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="nav">
-  <div class="shell nav-in">
+  <div class="nav-in">
     <a class="mark" href="#main">Edna Iusupova</a>
     <nav class="nav-links" aria-label="Sections">
       <a href="#education">Education</a>
@@ -272,16 +290,21 @@ td.num b{font-weight:600;color:var(--good)}
 <div class="shell">
 
   <section class="hero">
-    <p class="kicker rise d1">Paris-Saclay, M2 Distributed and Parallel Computing</p>
-    <h1 class="rise d2">Evaluating the code that models write.</h1>
-    <p class="sub rise d3">I benchmark AI-generated code against tuned references, from BLAS kernels to the engineering workflows a team actually runs.</p>
-    <div class="cta-row rise d4">
-      <a class="btn btn-primary" href="mailto:edna.iusupova@universite-paris-saclay.fr">Contact</a>
-      <a class="btn btn-ghost" href="#work">View work</a>
+    <div class="reveal">
+      <p class="pill">Paris-Saclay, M2 Distributed and Parallel Computing</p>
+      <h1>Evaluating the code that models write.</h1>
+    </div>
+    <div class="reveal">
+      <p class="sub">I benchmark AI-generated code against tuned references, from BLAS kernels to
+      the engineering workflows a team actually runs.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:edna.iusupova@universite-paris-saclay.fr">Contact<span class="ico" aria-hidden="true">&#8599;</span></a>
+        <a class="btn btn-ghost" href="#work">View work</a>
+      </div>
     </div>
   </section>
 
-  <div class="ident">
+  <div class="bez reveal"><div class="core"><div class="ident">
     <div>
       <p class="k">Experience</p>
       <p class="v">4 years, 4 companies<br><em>while completing the degree</em></p>
@@ -302,11 +325,11 @@ td.num b{font-weight:600;color:var(--good)}
       <p class="k">Languages</p>
       <p class="v">English C1, Russian native<br><em>French A2, improving</em></p>
     </div>
-  </div>
+  </div></div></div>
 
   <section class="sec" id="focus">
-    <h2 class="sec-t">Research interests</h2>
-    <div class="focus">
+    <h2 class="sec-t reveal">Research interests</h2>
+    <div class="focus reveal">
       <div class="f-lead">
         <h3>Evaluating AI-generated code</h3>
         <p>When a model writes a compute kernel, the interesting question is not whether it
@@ -331,9 +354,9 @@ td.num b{font-weight:600;color:var(--good)}
   </section>
 
   <section class="sec" id="education">
-    <h2 class="sec-t">Education</h2>
+    <h2 class="sec-t reveal">Education</h2>
 
-    <div class="edu">
+    <div class="bez reveal"><div class="core"><div class="edu">
       <div>
         <div class="deg">
           <h3>M2 Distributed and Parallel Computing</h3>
@@ -380,14 +403,14 @@ td.num b{font-weight:600;color:var(--good)}
           </tbody>
         </table>
       </div>
-    </div>
+    </div></div></div>
   </section>
 
   <section class="sec" id="work">
-    <h2 class="sec-t">Research and projects</h2>
+    <h2 class="sec-t reveal">Research and projects</h2>
     <div class="work">
 
-      <article class="job">
+      <article class="bez reveal"><div class="core job">
         <div class="job-head">
           <h3>TrustGate</h3>
           <p class="cred">
@@ -416,9 +439,9 @@ td.num b{font-weight:600;color:var(--good)}
             <a href="https://github.com/ednaiu/TrustGate">Repository</a>
           </div>
         </div>
-      </article>
+      </div></article>
 
-      <article class="job">
+      <article class="bez reveal"><div class="core job">
         <div class="job-head">
           <h3>AI-Driven BLAS Library</h3>
           <p class="cred">
@@ -444,9 +467,9 @@ td.num b{font-weight:600;color:var(--good)}
             <a href="https://github.com/ednaiu/2526-m1qdcs-terhpc">Repository</a>
           </div>
         </div>
-      </article>
+      </div></article>
 
-      <article class="job">
+      <article class="bez reveal"><div class="core job">
         <div class="job-head">
           <h3>Cloud GPU Compiler</h3>
           <p class="cred">
@@ -472,9 +495,9 @@ td.num b{font-weight:600;color:var(--good)}
             <!-- TODO: publish source and link the repository here -->
           </div>
         </div>
-      </article>
+      </div></article>
 
-      <article class="job">
+      <article class="bez reveal"><div class="core job">
         <div class="job-head">
           <h3>Stance Detection in Conversations</h3>
           <p class="cred">
@@ -498,14 +521,14 @@ td.num b{font-weight:600;color:var(--good)}
             <a href="https://github.com/ednaiu/Stance-detection-NLP">Repository</a>
           </div>
         </div>
-      </article>
+      </div></article>
 
     </div>
   </section>
 
   <section class="sec" id="experience">
-    <h2 class="sec-t">Experience</h2>
-    <div class="xp">
+    <h2 class="sec-t reveal">Experience</h2>
+    <div class="bez reveal"><div class="core"><div class="xp">
 
       <div class="xp-row">
         <p class="xp-when">2025 to 2025</p>
@@ -548,16 +571,16 @@ td.num b{font-weight:600;color:var(--good)}
         </div>
       </div>
 
-    </div>
+    </div></div></div>
   </section>
 </div>
 
 <div class="shell">
   <section class="contact" id="contact">
-    <h2>Working on kernels or inference performance?</h2>
+    <h2 class="reveal">Working on kernels or inference performance?</h2>
     <p>I am interested in problems where the speedup has to be measured, not asserted.</p>
     <div class="reach">
-      <a class="btn btn-primary" href="mailto:edna.iusupova@universite-paris-saclay.fr">Contact</a>
+      <a class="btn btn-primary" href="mailto:edna.iusupova@universite-paris-saclay.fr">Contact<span class="ico" aria-hidden="true">&#8599;</span></a>
       <a class="plain" href="https://github.com/ednaiu">github.com/ednaiu</a>
       <a class="plain" href="https://www.linkedin.com/in/ednaiu/">linkedin.com/in/ednaiu</a>
     </div>
@@ -577,6 +600,18 @@ td.num b{font-weight:600;color:var(--good)}
     root.setAttribute("data-theme",next);
     try{localStorage.setItem(KEY,next);}catch(e){}
   });
+})();
+</script>
+<script>
+(function(){
+  var els=document.querySelectorAll(".reveal");
+  if(!("IntersectionObserver" in window)||window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+    els.forEach(function(e){e.classList.add("in");}); return;
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target);} });
+  },{rootMargin:"0px 0px -12% 0px",threshold:0.08});
+  els.forEach(function(e){io.observe(e);});
 })();
 </script>
 </body>
