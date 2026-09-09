@@ -128,6 +128,7 @@ a{color:inherit}
 /* ---------- double bezel ---------- */
 .bez{background:var(--shell);border:1px solid var(--shell-ring);border-radius:var(--r-out);
   padding:var(--shell-pad);box-shadow:var(--amb)}
+.bez + .bez{margin-top:1.5rem}
 .core{background:var(--core);border-radius:var(--r-in);box-shadow:var(--inset);
   padding:clamp(1.5rem,3.5vw,2.5rem)}
 
@@ -337,8 +338,9 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
   <div class="bez reveal"><div class="core">
     <div class="proof">
       <div>
-        <p class="lede">It finds <b>2.5&#215;</b> more of what a model gets wrong.</p>
-        <p class="say">Static analysers were built for human mistakes. On the defects that
+        <p class="lede">TrustGate finds <b>2.5&#215;</b> more of what a model gets wrong.</p>
+        <p class="say">A merge gate I built for Python, and the clearest answer I have to the
+        question above. Static analysers were built for human mistakes. On the defects that
         generated code actually produces, they miss most of them.</p>
       </div>
       <div>
