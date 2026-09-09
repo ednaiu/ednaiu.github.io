@@ -28,6 +28,7 @@
   --link:#1A4FA0;
   --good:#1B7A4B;
   --mark-n:#8A929B;
+  --mark-bad:#A8412F;
   --focus:#1F6FEB;
   --amb:0 1px 2px rgba(16,18,22,.04), 0 10px 30px -12px rgba(16,18,22,.10), 0 30px 70px -30px rgba(16,18,22,.14);
   --inset:inset 0 1px 0 rgba(255,255,255,.9);
@@ -56,6 +57,7 @@
     --link:#8CB8F7;
     --good:#5CC48F;
     --mark-n:#6B737C;
+    --mark-bad:#E08A72;
     --focus:#5C9DFF;
     --amb:0 1px 2px rgba(0,0,0,.5), 0 14px 40px -14px rgba(0,0,0,.7);
     --inset:inset 0 1px 0 rgba(255,255,255,.06);
@@ -64,7 +66,7 @@
 :root[data-theme="dark"]{
   --ground:#0A0B0D; --shell:rgba(255,255,255,.045); --shell-ring:rgba(255,255,255,.09);
   --core:#131519; --ink:#ECEEF1; --ink-2:#9AA1A9; --ink-3:#737A82; --hair:rgba(255,255,255,.08);
-  --link:#8CB8F7; --good:#5CC48F; --mark-n:#6B737C; --focus:#5C9DFF;
+  --link:#8CB8F7; --good:#5CC48F; --mark-n:#6B737C; --mark-bad:#E08A72; --focus:#5C9DFF;
   --amb:0 1px 2px rgba(0,0,0,.5), 0 14px 40px -14px rgba(0,0,0,.7);
   --inset:inset 0 1px 0 rgba(255,255,255,.06);
 }
@@ -146,6 +148,12 @@ a{color:inherit}
   color:var(--ink-2);text-align:right}
 .bar-row.lead .bar-fill{background:var(--good)}
 .bar-row.lead .bar-name,.bar-row.lead .bar-val{color:var(--good)}
+.bars.ratio .bar-track{position:relative}
+.bars.ratio .bar-track::after{content:"";position:absolute;left:25%;top:-4px;bottom:-4px;
+  width:1px;background:var(--ink);opacity:.55}
+.bar-row.bad .bar-fill{background:var(--mark-bad)}
+.bar-row.bad .bar-name,.bar-row.bad .bar-val{color:var(--mark-bad)}
+.bar-row.par .bar-val{color:var(--ink-2)}
 .chart-note{margin-top:1.6rem;font:400 .8125rem/1.65 var(--f-sans);color:var(--ink-3);max-width:46ch}
 
 /* ---------- identity strip ---------- */
@@ -359,8 +367,9 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
             <span class="bar-val">0.171</span>
           </div>
         </div>
-        <p class="chart-note">Corpus v1, 245 samples with full provenance. TrustGate holds 1.000
-        precision and flags none of the 74 clean files.</p>
+        <p class="chart-note">Corpus v1, 245 samples with full provenance. On this corpus it
+        raised no false positive on any of the 74 clean files. That is a result on this sample,
+        not a guarantee for arbitrary code, and semgrep is equally clean here.</p>
       </div>
     </div>
   </div></div>
@@ -487,12 +496,12 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
           pipeline can act on. The point of the project is the measurement: on a corpus of 245
           samples it is compared against bandit, semgrep, ruff and flake8, and on the slice that
           matters, generated-code defects, it recalls 0.854 against 0.341 for the next best tool,
-          at full precision and no false positives across the 74 clean samples.</p>
+          and it raised no false positive on any of the 74 clean files in that corpus.</p>
         </div>
         <div class="job-aside">
           <div class="stack">
             <div><p class="k">Corpus</p><p class="v">245 samples</p></div>
-            <div><p class="k">Precision</p><p class="v">1.000</p></div>
+            <div><p class="k">Precision</p><p class="v">1.000 on v1</p></div>
             <div><p class="k">False positives</p><p class="v">0 of 74 clean</p></div>
             <div><p class="k">Output</p><p class="v">SARIF, CI verdict</p></div>
           </div>
@@ -507,23 +516,57 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
           <h3>AI-Driven BLAS Library</h3>
           <p class="cred">
         <span>Research project (TER), Paris-Saclay</span><br>
-        <span>Supervised by Oguz Kaya</span><br>
+        <span>With Rosemarie Streefkerk, supervised by Oguz Kaya</span><br>
         <span class="grade">Graded 19/20</span>
           </p>
         </div>
         <div>
-          <p>A multithreaded BLAS implementation built to rival OpenBLAS, where an AI assistant
-          writes the kernels and I build the optimisation methodology around them: AVX2 microkernels
-          with FMA, cache tiling, autotuned parameter search, and coverage across levels 1 to 3, each level measured against the reference implementation rather than assumed.</p>
+          <p>The question was whether a single-precision BLAS library, written entirely by a code
+          model under natural-language prompting, can match hand-optimised references on AVX2 and
+          OpenMP hardware. Nineteen kernels across all three levels, benchmarked against OpenBLAS.
+          The answer is yes, on one condition: the human does the hardware diagnosis. Across 36
+          tasks the model failed 8 times, and almost every failure was mathematically correct code
+          that was pathological on real silicon: column-stride access, false sharing, a sequential
+          reduction where a binary tree was needed. None of them were algorithmic errors, and the
+          model could not diagnose any of them unprompted.</p>
+          <p style="margin-top:1.1rem">Autotuning the SGEMM block sizes with Bayesian optimisation
+          reached the best result in the fewest trials, 66.92 GF/s in 25 evaluations, and every
+          search strategy beat the default configuration by 10 to 15 percent.</p>
         </div>
         <div class="job-aside">
-          <div class="stack">
-            <div><p class="k">Language</p><p class="v">C, ASM</p></div>
-            <div><p class="k">Parallelism</p><p class="v">OpenMP</p></div>
-            <div><p class="k">Hardware</p><p class="v">20-core Intel</p></div>
-            <div><p class="k">Reference</p><p class="v">OpenBLAS</p></div>
+          <p class="chart-t">Throughput against OpenBLAS</p>
+          <p class="chart-s">Ratio per kernel at its best thread count. The vertical line marks
+          parity. Scale runs 0 to 4.</p>
+          <div class="bars ratio">
+            <div class="bar-row lead">
+              <span class="bar-name">sscal 8T</span>
+              <span class="bar-track"><span class="bar-fill" style="width:95%"></span></span>
+              <span class="bar-val">3.8&#215;</span>
+            </div>
+            <div class="bar-row lead">
+              <span class="bar-name">ssyr2 1T</span>
+              <span class="bar-track"><span class="bar-fill" style="width:55%"></span></span>
+              <span class="bar-val">2.2&#215;</span>
+            </div>
+            <div class="bar-row lead">
+              <span class="bar-name">sgemm 20T</span>
+              <span class="bar-track"><span class="bar-fill" style="width:40%"></span></span>
+              <span class="bar-val">1.6&#215;</span>
+            </div>
+            <div class="bar-row par">
+              <span class="bar-name">sger 16T</span>
+              <span class="bar-track"><span class="bar-fill" style="width:24.5%"></span></span>
+              <span class="bar-val">0.98&#215;</span>
+            </div>
+            <div class="bar-row bad">
+              <span class="bar-name">ssymv 16T</span>
+              <span class="bar-track"><span class="bar-fill" style="width:3.5%"></span></span>
+              <span class="bar-val">0.14&#215;</span>
+            </div>
           </div>
-          <!-- TODO image slot: benchmark chart, GFLOP/s vs OpenBLAS, 1200x800 -->
+          <p class="chart-note">SGEMM reaches 752 GF/s at 20 threads and 95 percent of single-core
+          hardware peak. The ssymv result is a column-stride pathology on the reflected triangle
+          that we did not resolve, and it is reported as such.</p>
           <div class="job-links">
             <a href="https://github.com/ednaiu/2526-m1qdcs-terhpc">Repository</a>
           </div>
