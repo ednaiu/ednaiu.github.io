@@ -537,8 +537,9 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
         </div>
         <div class="job-aside">
           <p class="chart-t">Throughput against OpenBLAS</p>
-          <p class="chart-s">Ratio per kernel at its best thread count. The vertical line marks
-          parity. Scale runs 0 to 4.</p>
+          <p class="chart-s">Each kernel at its best thread count, divided by the OpenBLAS result.
+          The tick marks 1.0, where the two are equal: past it is faster, short of it is slower.
+          Scale runs 0 to 4.</p>
           <div class="bars ratio">
             <div class="bar-row lead">
               <span class="bar-name">sscal 8T</span>
