@@ -27,6 +27,7 @@
   --hair:rgba(16,18,22,.07);
   --link:#1A4FA0;
   --good:#1B7A4B;
+  --mark-n:#8A929B;
   --focus:#1F6FEB;
   --amb:0 1px 2px rgba(16,18,22,.04), 0 10px 30px -12px rgba(16,18,22,.10), 0 30px 70px -30px rgba(16,18,22,.14);
   --inset:inset 0 1px 0 rgba(255,255,255,.9);
@@ -54,6 +55,7 @@
     --hair:rgba(255,255,255,.08);
     --link:#8CB8F7;
     --good:#5CC48F;
+    --mark-n:#6B737C;
     --focus:#5C9DFF;
     --amb:0 1px 2px rgba(0,0,0,.5), 0 14px 40px -14px rgba(0,0,0,.7);
     --inset:inset 0 1px 0 rgba(255,255,255,.06);
@@ -62,7 +64,7 @@
 :root[data-theme="dark"]{
   --ground:#0A0B0D; --shell:rgba(255,255,255,.045); --shell-ring:rgba(255,255,255,.09);
   --core:#131519; --ink:#ECEEF1; --ink-2:#9AA1A9; --ink-3:#737A82; --hair:rgba(255,255,255,.08);
-  --link:#8CB8F7; --good:#5CC48F; --focus:#5C9DFF;
+  --link:#8CB8F7; --good:#5CC48F; --mark-n:#6B737C; --focus:#5C9DFF;
   --amb:0 1px 2px rgba(0,0,0,.5), 0 14px 40px -14px rgba(0,0,0,.7);
   --inset:inset 0 1px 0 rgba(255,255,255,.06);
 }
@@ -126,6 +128,25 @@ a{color:inherit}
   padding:var(--shell-pad);box-shadow:var(--amb)}
 .core{background:var(--core);border-radius:var(--r-in);box-shadow:var(--inset);
   padding:clamp(1.5rem,3.5vw,2.5rem)}
+
+/* ---------- proof chart ---------- */
+.proof{display:grid;gap:2.5rem}
+@media (min-width:62rem){.proof{grid-template-columns:.85fr 1.15fr;gap:4rem;align-items:center}}
+.proof .lede{font:600 clamp(1.5rem,2.6vw,2rem)/1.15 var(--f-sans);letter-spacing:-.03em;margin-bottom:.9rem}
+.proof .lede b{color:var(--good);font-weight:600}
+.proof .say{color:var(--ink-2);font-size:.9375rem;max-width:34ch}
+.chart-t{font:500 .8125rem/1.4 var(--f-mono);color:var(--ink);margin-bottom:.35rem}
+.chart-s{font:400 .8125rem/1.55 var(--f-sans);color:var(--ink-3);margin-bottom:1.6rem;max-width:44ch}
+.bars{display:grid;gap:.85rem}
+.bar-row{display:grid;grid-template-columns:5.25rem 1fr 3rem;align-items:center;gap:1rem}
+.bar-name{font:400 .8125rem/1 var(--f-mono);color:var(--ink-2);white-space:nowrap}
+.bar-track{height:14px;border-radius:7px;background:var(--hair)}
+.bar-fill{height:14px;border-radius:7px;background:var(--mark-n)}
+.bar-val{font:600 .875rem/1 var(--f-mono);font-variant-numeric:tabular-nums;
+  color:var(--ink-2);text-align:right}
+.bar-row.lead .bar-fill{background:var(--good)}
+.bar-row.lead .bar-name,.bar-row.lead .bar-val{color:var(--good)}
+.chart-note{margin-top:1.6rem;font:400 .8125rem/1.65 var(--f-sans);color:var(--ink-3);max-width:46ch}
 
 /* ---------- identity strip ---------- */
 .ident{display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:2rem 2.5rem}
@@ -303,6 +324,46 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
       </div>
     </div>
   </section>
+
+
+  <div class="bez reveal"><div class="core">
+    <div class="proof">
+      <div>
+        <p class="lede">It finds <b>2.5&#215;</b> more of what a model gets wrong.</p>
+        <p class="say">Static analysers were built for human mistakes. On the defects that
+        generated code actually produces, they miss most of them.</p>
+      </div>
+      <div>
+        <p class="chart-t">Recall on generated-code defects</p>
+        <p class="chart-s">41 defective samples: hallucinated imports and APIs, invented keyword
+        arguments, stubs, hard-coded filler values. Scale runs 0 to 1.</p>
+        <div class="bars">
+          <div class="bar-row lead">
+            <span class="bar-name">TrustGate</span>
+            <span class="bar-track"><span class="bar-fill" style="width:85.4%"></span></span>
+            <span class="bar-val">0.854</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-name">bandit</span>
+            <span class="bar-track"><span class="bar-fill" style="width:34.1%"></span></span>
+            <span class="bar-val">0.341</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-name">ruff</span>
+            <span class="bar-track"><span class="bar-fill" style="width:19.5%"></span></span>
+            <span class="bar-val">0.195</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-name">semgrep</span>
+            <span class="bar-track"><span class="bar-fill" style="width:17.1%"></span></span>
+            <span class="bar-val">0.171</span>
+          </div>
+        </div>
+        <p class="chart-note">Corpus v1, 245 samples with full provenance. TrustGate holds 1.000
+        precision and flags none of the 74 clean files.</p>
+      </div>
+    </div>
+  </div></div>
 
   <div class="bez reveal"><div class="core"><div class="ident">
     <div>
