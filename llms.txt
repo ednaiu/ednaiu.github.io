@@ -14,7 +14,6 @@ Languages: English C1 with the Certificate in Advanced English, Russian native, 
 
 ## Projects
 
-- [TrustGate](https://github.com/ednaiu/TrustGate): Merge gate scoring Python against the defect profile of generated code. Benchmarked on 245 samples against bandit, semgrep, ruff and flake8, reaching 0.854 recall on the generative-defect slice against 0.341 for the next best tool, at 1.000 precision and zero false positives across 74 clean samples.
 - [AI-Driven BLAS Library](https://github.com/ednaiu/2526-m1qdcs-terhpc): Master's research project graded 19 out of 20, supervised by Oguz Kaya. AVX2 microkernels with FMA, cache tiling, OpenMP threading and autotuned search, measured against OpenBLAS on a 20-core workstation.
 - [Cloud GPU Compiler](https://marketplace.visualstudio.com/items?itemName=EdnaIusupova.cuda-cloud-compiler): Published VS Code extension compiling and running CUDA on remote GPUs through the Compiler Explorer API, supporting single files and CMake projects with no local toolchain.
 - [Flood Map Prediction](https://github.com/ednaiu/Flood-Prediction-Starting-Kit): Preprocessing pipeline harmonising ERA5 climate series with 13 static environmental layers at 250 m resolution and satellite flood labels, for training and evaluating a flood classifier over France.
