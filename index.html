@@ -250,10 +250,11 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
   .stack{grid-template-columns:1fr}
   .pill{max-width:100%;white-space:normal;letter-spacing:.14em}
   .nav{padding-left:1rem;padding-right:1rem}
-  .nav-in{gap:.9rem;padding-left:1rem;width:calc(100vw - 2rem);overflow-x:auto;scrollbar-width:none}
-  .nav-in::-webkit-scrollbar{display:none}
-  .nav-links{gap:.9rem}
-  .nav-links a{font-size:.75rem}
+  .nav-in{flex-direction:column;align-items:stretch;gap:.65rem;padding:.7rem .8rem;width:calc(100vw - 2rem);border-radius:1.25rem}
+  .mark{font-size:.8125rem;text-align:center}
+  .nav-links{flex:1;justify-content:space-between;gap:.35rem}
+  .nav-links a{font-size:.6875rem}
+  .tgl{display:none}
 }
 @media print{
   .nav,.tgl,.skip,.cta-row{display:none}
