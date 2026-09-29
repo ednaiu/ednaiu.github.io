@@ -1,10 +1,10 @@
 # Edna Iusupova
 
-> AI infrastructure and ML systems engineer building agent platforms, developer tooling and performance-critical software. Based in the Paris region, France.
+> Systems analyst and AI infrastructure engineer building enterprise platforms, developer tooling and performance-critical software. Based in the Paris region, France.
 
 Edna Iusupova is enrolled in the M2 Distributed and Parallel Computing (DiPaC) programme at Universite Paris-Saclay for 2026 to 2027, following the M1 Quantum and Distributed Computer Science programme at the same university. She holds a BSc in Software Engineering, Neurotechnologies and Programming, from ITMO University in Saint Petersburg, with a cumulative average of 9.04 out of 10. She completed the Gray Scott School 2026, a 56-hour European HPC summer school on programming and optimisation for heterogeneous architectures, organised by LAPP and CC-FR under the EuroHPC Joint Undertaking.
 
-She has four years of professional experience across four companies while studying. At Smart Retail Tech, she designed and delivered an end-to-end AI engineering platform: MCP services connecting five corporate systems, a web agent, a CLI, centralised authorisation and SkillHub for reusable agent skills. The platform supports the development lifecycle from analysis and implementation through testing, security checks and release. It carries 83 initiatives, including 35 in production; 56 of the 73 initiatives that reached a decision were adopted after controlled trials.
+She has four years of systems analysis experience across electronic document management, accounting, fintech, HR-tech and retail back-office systems. Her work covers business-process analysis, BPMN and UML modelling, integration requirements, testing and release. At Smart Retail Tech, she designed and delivered an end-to-end AI engineering platform: MCP services connecting five corporate systems, a web agent, a CLI, centralised authorisation and SkillHub for reusable agent skills. The platform supports the development lifecycle from analysis and implementation through testing, security checks and release. It carries 83 initiatives, including 35 in production; 56 of the 73 initiatives that reached a decision were adopted after controlled trials.
 
 Engineering focus: end-to-end AI engineering infrastructure, agent evaluation and adoption, developer tooling, high-performance computing, distributed systems, kernel optimisation, autotuning and performance modelling.
 
