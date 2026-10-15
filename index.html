@@ -293,12 +293,11 @@ main{position:relative}
 .w-capc{fill:var(--g-cap)}
 .w-tassel{fill:none;stroke:var(--g-gold);stroke-width:.7}
 .w-cover{fill:#9C3D2E}
-.w-pages{fill:#FAFAF7;stroke:#CFD4DA;stroke-width:.35}
-.w-text{fill:none;stroke:#AEB4BC;stroke-width:.45;stroke-linecap:round}
-.w-spine{fill:none;stroke:#BFC5CC;stroke-width:.5}
-.w-turn{transform-box:fill-box;transform-origin:0 50%}
-.walker.reading .w-turn{animation:turn 3.6s ease-in-out infinite}
-@keyframes turn{0%,70%{transform:scaleX(1)}100%{transform:scaleX(-1)}}
+.w-text{fill:none;stroke:#8A9099;stroke-width:.6;stroke-linecap:round}
+.w-gutter{fill:none;stroke:#C3C9D0;stroke-width:.6}
+.w-edge{fill:none;stroke:#9C3D2E;stroke-width:1.2;stroke-linecap:round}
+.w-spine{fill:none;stroke:#7A2E22;stroke-width:.8;stroke-linecap:round}
+.w-pages{fill:#FAFAF7;stroke:#C9CED6;stroke-width:.35}
 .w-torch,.w-pool{display:none}
 .w-torchc{fill:#C9CDD3}
 .w-pool{fill:#FFE7A8}
@@ -320,7 +319,8 @@ main{position:relative}
 .p-hub{fill:var(--ink-2)}
 @keyframes prop{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.12)}}
 @media (prefers-reduced-motion:reduce){
-  .trail .ico *,.w-cap,.w-turn{transition:none!important;animation:none!important}
+  .trail .ico *,.w-cap{transition:none!important;animation:none!important}
+  .w-flipper{display:none}
 }
 .walker{position:absolute;left:0;top:0;overflow:visible;opacity:0;will-change:transform}
 .walker,.plane{
@@ -830,8 +830,11 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
           <path class="w-shoe" d="M27 106.8H33.8C37.2 107.1 39.4 108.8 39.6 111.2V112.6H27Z"/>
         </g>
         <g class="w-armb">
-          <rect class="w-blazer2" x="27.6" y="35" width="5.8" height="25" rx="2.9"/>
-          <circle class="w-skin" cx="30.5" cy="61.6" r="2.5"/>
+          <rect class="w-blazer2" x="27.6" y="35" width="5.8" height="15" rx="2.9"/>
+          <g class="w-fore">
+            <rect class="w-blazer2" x="27.6" y="45.5" width="5.8" height="14.5" rx="2.9"/>
+            <circle class="w-skin" cx="30.5" cy="61.6" r="2.5"/>
+          </g>
         </g>
         <g class="w-legf">
           <path class="w-trouser" d="M26.6 65.5H34.2L33.6 107.6H27.4Z"/>
@@ -865,21 +868,27 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
           <circle class="w-gold" cx="41.5" cy="16.6" r="1"/>
         </g>
         </g>
-        <g class="w-book" opacity="0" transform="rotate(-14 51 43)">
-          <path class="w-cover" d="M41.5 38.6L51 40.3L60.5 38.6V48.6L51 50.3L41.5 48.6Z"/>
-          <path class="w-pages" d="M42.6 37.6Q47 36.4 51 38.9V49.2Q47 47 42.6 47.8Z"/>
-          <path class="w-pages" d="M51 38.9Q55 36.4 59.4 37.6V47.8Q55 47 51 49.2Z"/>
-          <path class="w-text" d="M44.2 40.1Q47 39.3 49.6 40.5M44.2 42.3Q47 41.5 49.6 42.7M44.2 44.5Q47 43.7 49.6 44.9M52.4 40.5Q55 39.3 57.8 40.1M52.4 42.7Q55 41.5 57.8 42.3M52.4 44.9Q55 43.7 57.8 44.5"/>
-          <path class="w-pages w-turn" d="M51 38.9Q55 36.4 59.4 37.6V47.8Q55 47 51 49.2Z"/>
-          <path class="w-spine" d="M51 38.9V49.2"/>
+        <g class="w-book" opacity="0">
+          <path class="w-cover" d="M43 28.9L50.9 35.5L61.9 34.3L60.4 48.2L49.4 50L41.4 42.9Z"/>
+          <path class="w-pages" d="M50.9 36.4L43.5 29.7L42.1 42.3L49.5 49Z"/>
+          <path class="w-pages" d="M50.9 36.4L61.1 34.8L59.7 47.4L49.5 49Z"/>
+          <path class="w-pages w-flipper" d="M50.9 36.4L61.1 34.8L59.7 47.4L49.5 49Z">
+            <animate attributeName="d" dur="3.4s" repeatCount="indefinite" keyTimes="0;.55;.7;.85;1"
+              values="M50.9 36.4L61.1 34.8L59.7 47.4L49.5 49Z;M50.9 36.4L61.1 34.8L59.7 47.4L49.5 49Z;M50.9 36.4L51.9 27.9L50.5 40.5L49.5 49Z;M50.9 36.4L43.5 29.7L42.1 42.3L49.5 49Z;M50.9 36.4L43.5 29.7L42.1 42.3L49.5 49Z"/>
+          </path>
+          <path class="w-text" d="M49.7 38.8L44.3 33.9M49.4 41.3L44 36.4M49.1 43.8L43.7 38.9M51.8 39.4L59.2 38.2M51.5 41.9L58.9 40.7M51.2 44.4L58.7 43.2"/>
+          <path class="w-gutter" d="M50.9 36.4L49.5 49"/>
         </g>
         <g class="w-armf">
-          <rect class="w-blazer" x="27.6" y="35" width="5.8" height="25" rx="2.9"/>
-          <rect class="w-shirt" x="27.6" y="57.6" width="5.8" height="1.6"/>
-          <circle class="w-skin" cx="30.5" cy="61.6" r="2.5"/>
-          <g class="w-torch">
-            <path d="M36.5 61.6L100 78L84 113Z" fill="url(#w-beam)"/>
-            <rect class="w-torchc" x="29.5" y="60.2" width="7.5" height="2.8" rx="1"/>
+          <rect class="w-blazer" x="27.6" y="35" width="5.8" height="15" rx="2.9"/>
+          <g class="w-fore">
+            <rect class="w-blazer" x="27.6" y="45.5" width="5.8" height="14.5" rx="2.9"/>
+            <rect class="w-shirt" x="27.6" y="57.6" width="5.8" height="1.6"/>
+            <circle class="w-skin" cx="30.5" cy="61.6" r="2.5"/>
+            <g class="w-torch">
+              <path d="M36.5 61.6L100 78L84 113Z" fill="url(#w-beam)"/>
+              <rect class="w-torchc" x="29.5" y="60.2" width="7.5" height="2.8" rx="1"/>
+            </g>
           </g>
         </g>
       </g>
@@ -958,7 +967,8 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
       stopsG=map.querySelector(".stops"),iconsG=map.querySelector(".icons"),
       walker=trail.querySelector(".walker"),flip=walker.querySelector(".w-flip"),fig=walker.querySelector(".w-fig"),
       legF=walker.querySelector(".w-legf"),legB=walker.querySelector(".w-legb"),
-      armF=walker.querySelector(".w-armf"),armB=walker.querySelector(".w-armb"),hairB=walker.querySelector(".w-hairb"),
+      armF=walker.querySelector(".w-armf"),armB=walker.querySelector(".w-armb"),
+      foreF=walker.querySelector(".w-armf .w-fore"),foreB=walker.querySelector(".w-armb .w-fore"),hairB=walker.querySelector(".w-hairb"),
       head=walker.querySelector(".w-head"),book=walker.querySelector(".w-book"),torch=walker.querySelector(".w-torch"),
       pool=walker.querySelector(".w-pool"),bubble=trail.querySelector(".bubble"),plane=trail.querySelector(".plane"),
       // each section is a stop; the picture stands where the path reaches the section
@@ -1124,9 +1134,12 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
     legF.setAttribute("transform","rotate("+a.toFixed(2)+" 30.4 68)");
     legB.setAttribute("transform","rotate("+(-a).toFixed(2)+" 30.4 68)");
     var busy=Math.min(1,reach+read+wave),wv=-150+16*Math.sin(waveClock*.012);
-    armF.setAttribute("transform","rotate("+(-a*.8*(1-busy)-55*reach-72*read+wv*wave).toFixed(2)+" 30.5 37)");
-    armB.setAttribute("transform","rotate("+(a*.8*(1-read)-58*read).toFixed(2)+" 30.5 37)");
-    head.setAttribute("transform","rotate("+(7*read).toFixed(2)+" 31 29)");
+    // reading: upper arms a little forward, forearms level, hands under the book
+    armF.setAttribute("transform","rotate("+(-a*.8*(1-busy)-55*reach-25*read+wv*wave).toFixed(2)+" 30.5 37)");
+    foreF.setAttribute("transform","rotate("+(-70*read).toFixed(2)+" 30.5 48)");
+    armB.setAttribute("transform","rotate("+(a*.8*(1-read)-15*read).toFixed(2)+" 30.5 37)");
+    foreB.setAttribute("transform","rotate("+(-85*read).toFixed(2)+" 30.5 48)");
+    head.setAttribute("transform","rotate("+(11*read).toFixed(2)+" 31 29)");
     walker.classList.toggle("reading",read>.5);
     book.setAttribute("opacity",read.toFixed(2));
     torch.setAttribute("opacity",(1-busy).toFixed(2));pool.setAttribute("opacity",(.22*(1-busy)).toFixed(3));
