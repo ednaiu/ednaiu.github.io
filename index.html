@@ -454,8 +454,9 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
       <p class="sub">I am an early-career researcher and an M2 student in Distributed and Parallel
       Computing at Université Paris-Saclay. My main research interests are how machine learning
       models and AI-generated code behave outside the conditions they were built for, and how to
-      measure it. Alongside my studies I coordinate the work on the internal AI platform of Smart
-      Retail Tech, the technology provider for an international discount retail chain.</p>
+      measure it. From June 2025 to September 2026 I coordinated the work on the internal AI
+      platform of Smart Retail Tech, the technology provider for an international discount retail
+      chain.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="mailto:edna.iusupova@universite-paris-saclay.fr" data-analytics-click="contact-email" data-analytics-title="Contact by email">Contact<span class="ico" aria-hidden="true">&#8599;</span></a>
         <a class="btn btn-ghost" href="#work" data-analytics-click="view-work" data-analytics-title="View research projects">View work</a>
@@ -499,13 +500,16 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
           <p>How the information given to an agent shapes its tool selection and cost, on a
           production platform that connects agents to eight corporate systems: 303 KB to 36 KB of
           context and 72 percent fewer tokens over measured iterations. Also a retrieval-augmented
-          product recognition service evaluated at 96 percent correct recognition by store managers.</p>
+          product recognition service evaluated at 96 percent correct recognition by store managers,
+          and a test suite of 36 reference cases for an agent-workflow package, scored PASS, PARTIAL
+          or FAIL against the previous rules, where some cases ask the agent to find contradictions
+          between a requirements page and its source specification.</p>
         </div>
         <div>
           <h3>Models and code outside their conditions</h3>
           <p>AI-generated BLAS kernels checked against OpenBLAS, where the model failed on 8 of 36
-          tasks, and a speech-emotion model that fell from 81 to 17 percent on spontaneous speech
-          before a new classification head restored 78 percent.</p>
+          tasks, and a speech-emotion model adapted to spontaneous speech, where a new classification
+          head on the frozen encoder reached 78 percent.</p>
         </div>
       </div>
     </div>
@@ -520,7 +524,8 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
           <h3>M2 Distributed and Parallel Computing</h3>
           <p class="m">Université Paris-Saclay, 2026 to 2027</p>
           <p>Parallel architectures, distributed systems and high-performance computing,
-          concluding with a six-month research project.</p>
+          concluding with a six-month research project. Current course: GPU programming in CUDA,
+          from memory coalescing and shared memory to streams and cuBLAS.</p>
         </div>
         <div class="deg">
           <h3>M1 Quantum and Distributed Computer Science</h3>
@@ -532,7 +537,9 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
           <h3>Gray Scott School 2026</h3>
           <p class="m">Annecy and online, June to July 2026, <span class="hl">56 hours</span></p>
           <p>European HPC summer school on programming and optimisation for heterogeneous
-          architectures, organised by LAPP and CC-FR under the EuroHPC Joint Undertaking.</p>
+          architectures, organised by LAPP and CC-FR under the EuroHPC Joint Undertaking. I validated
+          C++ and Kokkos versions of a Gray-Scott reaction-diffusion solver against 40 regression
+          tests and benchmarked the vectorised solver over 100 grid shapes.</p>
         </div>
         <div class="deg">
           <h3>BSc Software Engineering, Neurotechnologies and Programming</h3>
@@ -651,6 +658,32 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
 
       <article class="bez reveal"><div class="core job">
         <div class="job-head">
+          <h3>Flood Map Prediction</h3>
+          <p class="cred">
+        <span>Team project, Paris-Saclay, 2025</span><br>
+        <span>Climate and geospatial data</span><br>
+          </p>
+        </div>
+        <div>
+          <p>I prepared the data for the team's flood models over France: the feature cubes align
+          1,462 daily ERA5 climate steps with 13 static environmental layers at 250 m resolution
+          and satellite flood labels.</p>
+        </div>
+        <div class="job-aside">
+          <div class="stack">
+            <div><p class="k">Language</p><p class="v">Python</p></div>
+            <div><p class="k">Data</p><p class="v">ERA5, satellite labels</p></div>
+            <div><p class="k">My part</p><p class="v">data preparation</p></div>
+            <div><p class="k">Resolution</p><p class="v">250 m</p></div>
+          </div>
+          <div class="job-links">
+            <a href="https://github.com/ednaiu/Flood-Prediction-Starting-Kit" data-analytics-click="project-flood" data-analytics-title="Flood prediction repository">Repository</a>
+          </div>
+        </div>
+      </div></article>
+
+      <article class="bez reveal"><div class="core job">
+        <div class="job-head">
           <h3>Speech Feedback with Transformer Models</h3>
           <p class="cred">
         <span>Bachelor's thesis, ITMO University</span><br>
@@ -659,16 +692,19 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
         </div>
         <div>
           <p>I compared four speech transformers for emotion recognition and integrated WavLM into a
-          speech-feedback application; retested in 2026 on spontaneous speech, it fell from 81% to
-          17% accuracy, and a new classification head trained on the frozen encoder brought it back
-          to 78%.</p>
+          speech-feedback application. In 2026 I adapted it to spontaneous speech by training a new
+          classification head on the frozen encoder in PyTorch, which reached 78% accuracy.</p>
+          <p style="margin-top:1.1rem">I also added slide reading with PP-OCR and aligned speech to
+          slides through word overlap and multilingual-e5-small sentence embeddings. On four recorded
+          talks, 94% of speech time lands on the correct slide against 55% for a uniform split, with
+          settings tuned on the same talks.</p>
         </div>
         <div class="job-aside">
           <div class="stack">
             <div><p class="k">Language</p><p class="v">Python, PyTorch</p></div>
             <div><p class="k">Model</p><p class="v">WavLM</p></div>
-            <div><p class="k">Spontaneous speech</p><p class="v">17% to 78%</p></div>
-            <div><p class="k">Retested</p><p class="v">2026</p></div>
+            <div><p class="k">Spontaneous speech</p><p class="v">78%</p></div>
+            <div><p class="k">Slide alignment</p><p class="v">94%</p></div>
           </div>
         </div>
       </div></article>
@@ -700,6 +736,33 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
           </div>
         </div>
       </div></article>
+
+      <article class="bez reveal"><div class="core job">
+        <div class="job-head">
+          <h3>Support-Ticket Triage Agent</h3>
+          <p class="cred">
+        <span>Smart Retail Tech, 2026</span><br>
+        <span>Built on Flowise and n8n</span><br>
+          </p>
+        </div>
+        <div>
+          <p>A triage pipeline for a first-line support team, built on two platforms, Flowise and
+          n8n. It reads new Jira Service Desk tickets through MCP tools and routes each one to the
+          queue that resolves it, using a classifier, a second checking agent and the history of
+          similar closed tickets. Jira changes only after a person approves the plan.</p>
+          <p style="margin-top:1.1rem">The flows are generated from Python with automated tests, and
+          the same rules are published as reusable agent skills. A pilot evaluation on closed
+          tickets is planned.</p>
+        </div>
+        <div class="job-aside">
+          <div class="stack">
+            <div><p class="k">Language</p><p class="v">Python</p></div>
+            <div><p class="k">Platforms</p><p class="v">Flowise, n8n</p></div>
+            <div><p class="k">Tools</p><p class="v">MCP, Jira</p></div>
+            <div><p class="k">Control</p><p class="v">human approval</p></div>
+          </div>
+        </div>
+      </div></article>
     </div>
   </section>
 
@@ -728,25 +791,37 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
     <div class="bez reveal"><div class="core"><div class="xp">
 
       <div class="xp-row">
-        <p class="xp-when">2025 to present</p>
+        <p class="xp-when">Jun 2025 to Sep 2026</p>
         <div class="xp-what">
           <h3>Business System Analyst, AI Platform and Developer Tooling</h3>
-          <p class="xp-co">Smart Retail Tech, technology provider for a major international discount retail network</p>
-          <p>I have four years of systems analysis experience across electronic document
-          management, accounting, fintech, HR-tech and retail back-office systems. I translate
-          business processes into BPMN and UML models, integration requirements and delivery plans
-          carried through testing and release.</p>
-          <p style="margin-top:1.1rem">At Smart Retail Tech, I designed and delivered an end-to-end AI engineering platform: MCP services joining
+          <p class="xp-co">Smart Retail Tech, technology provider for an international discount retail chain with thousands of stores</p>
+          <p>I bring four years of systems analysis experience across electronic document
+          management, accounting, fintech, HR-tech and retail back-office systems. In this role I
+          translated business processes into BPMN and UML models, integration requirements and
+          delivery plans, and carried them through testing and release.</p>
+          <p style="margin-top:1.1rem">At Smart Retail Tech, I designed and delivered an end-to-end AI engineering platform: MCP services connecting
           eight corporate systems, a web agent, a CLI, centralised authorisation and SkillHub for
           reusable agent skills.</p>
+          <p style="margin-top:1.1rem">In production, the platform serves
+          <span class="hl">more than 100 active users</span> and handles
+          <span class="hl">over 60,000 agent tool calls a month</span>, more than 90 percent of them
+          successful. Users sign in through OAuth 2.0 with PKCE in Keycloak or with personal tokens,
+          and agents reach SAP ERP only through an allowlist of approved function modules, under each
+          user's own SAP authorisation.</p>
           <p style="margin-top:1.1rem">The platform supports the development lifecycle from
-          analysis and implementation through testing, security checks and release. It carries
-          <span class="hl">83 initiatives</span>, including <span class="hl">35 in production</span>;
-          56 of the 73 initiatives that reached a decision were adopted after controlled trials.</p>
-          <p style="margin-top:1.1rem">I also established the operating model used to support
+          analysis and implementation to security checks and release.
+          <span class="hl">83 initiatives</span> have run on it, <span class="hl">35</span> of them
+          in production; 56 of the 73 initiatives that reached a decision were adopted after
+          controlled trials.</p>
+          <p style="margin-top:1.1rem">I also set up the operating model for supporting
           teams across <span class="hl">6 documentation spaces</span> and
           <span class="hl">3 delivery projects</span>, combining platform development with
           hands-on consulting for analysts, developers and QA.</p>
+          <p style="margin-top:1.1rem">Beyond the AI platform, I brought an electronic document flow
+          to completion. I designed its amount and VAT calculation and its PDF invoice generation from
+          XML, so accountants no longer take part in approving every document package. I also worked
+          as third-line support for the production systems, analysing incidents from Grafana metrics
+          and Kibana logs, and built Grafana dashboards on SQL queries.</p>
         </div>
       </div>
 
@@ -766,6 +841,8 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
         <div class="xp-what">
           <h3>System Analyst</h3>
           <p class="xp-co">Mirapolis, HR-tech software provider</p>
+          <p>LMS features and onboarding flows for an enterprise learning platform, specified and
+          carried through user acceptance testing and documentation handover.</p>
         </div>
       </div>
 
@@ -774,6 +851,8 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
         <div class="xp-what">
           <h3>Python Developer</h3>
           <p class="xp-co">Unilever, global consumer goods company</p>
+          <p>An Azure-based web platform for industrial-logistics risk evaluation, with
+          decision-support logic for each role, deployed for non-technical supply-chain teams.</p>
         </div>
       </div>
 
