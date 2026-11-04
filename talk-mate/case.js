@@ -17,7 +17,7 @@
       comparison.closest('a').href = comparison.src;
       comparison.closest('a').setAttribute('aria-label', before ? 'Open earlier results screenshot' : 'Open revised results screenshot');
       comparison.alt = before ? 'Earlier results screen: a full list of metrics precedes advice.' : 'Updated results screen: a short observation, one next step and a repeat button.';
-      document.querySelector('#comparison-caption').textContent = before ? 'Earlier iteration · metrics first' : 'Current iteration · next step first';
+      document.querySelector('#comparison-caption').textContent = before ? 'Earlier results screen · Russian build' : 'Revised results screen';
     });
   });
   const dialog = document.querySelector('#screen-viewer');

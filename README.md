@@ -1,7 +1,6 @@
 # ednaiu.github.io
 
-Personal site. Single static `index.html`, no build step, no dependencies
-beyond the IBM Plex webfont.
+Static personal site with a separate Talk Mate project page. No build step; typography uses IBM Plex webfonts and the bundled Manrope font.
 
 ## Deploy to GitHub Pages
 

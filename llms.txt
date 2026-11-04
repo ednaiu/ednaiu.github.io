@@ -14,7 +14,7 @@ Languages: English C1 with the Certificate in Advanced English, Russian native, 
 
 ## Projects
 
-- [Talk Mate](https://ednaiu.github.io/talk-mate/): Product design and engineering case study of a working speech-rehearsal prototype, from recording with optional PDF slides to actionable feedback. Includes native iOS screens, design iterations, research context and limitations.
+- [Talk Mate](https://ednaiu.github.io/talk-mate/): A speech-rehearsal application developed from a bachelor’s thesis. The case covers the mobile interface, PDF slides, speech analysis and revisions to the results screen.
 
 - [AI-Driven BLAS Library](https://github.com/ednaiu/2526-m1qdcs-terhpc): Master's research project graded 19 out of 20, supervised by Oguz Kaya. AVX2 microkernels with FMA, cache tiling, OpenMP threading and autotuned search, measured against OpenBLAS on a 20-core workstation.
 - [Cloud GPU Compiler](https://marketplace.visualstudio.com/items?itemName=EdnaIusupova.cuda-cloud-compiler): Published VS Code extension compiling and running CUDA on remote GPUs through the Compiler Explorer API, supporting single files and CMake projects with no local toolchain.
