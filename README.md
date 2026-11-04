@@ -30,3 +30,5 @@ Search the file for `TODO` — there are three:
 ## Talk Mate case study
 
 `talk-mate/index.html` is the product case, with a responsive layout, shared portfolio theme preference, before/after results comparison and a keyboard-accessible screen viewer. `talk-mate/assets/` contains the English demo screenshots in WebP, the existing app icon, cover and Manrope font with its OFL licence. All app content shown is demonstration data. The case distinguishes research context, design hypotheses and pending user validation.
+
+The Models section includes the server pipeline, eight-recogniser benchmark, WavLM checkpoint comparison and slide-alignment evaluation. Downloadable JSON/CSV report the measured values and conditions. The ASR plot is exported as SVG and PNG; mobile uses a compact comparison.

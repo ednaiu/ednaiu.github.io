@@ -1,0 +1,9 @@
+model,WER Podlodka %,filler recall Podlodka %,filler precision Podlodka %,WER SOVA %,WER FLEURS %,hesitation recall %,RTF Podlodka,timing hardware
+GigaAM-v3 e2e CTC,6.92,96.77,85.71,12.77,4.21,49.09,0.0268,Apple M5 CPU
+GigaAM-v3 e2e RNNT,7.17,90.32,84.85,12.03,4.08,36.36,0.023,Apple M5 CPU
+GigaAM-v3 RNNT,6.15,93.55,87.88,10.22,5.68,0.0,0.0243,Apple M5 CPU
+GigaAM-v3 CTC,7.0,87.1,93.1,10.38,5.91,0.0,0.0204,Apple M5 CPU
+Parakeet TDT 0.6B v3,9.14,70.97,91.67,15.32,5.03,3.64,0.0556,Apple M5 CPU
+T-one,15.63,70.97,91.67,10.73,12.1,0.0,0.0508,Apple M5 CPU
+Vosk small,27.41,54.84,94.44,28.16,19.31,0.0,0.0723,Apple M5 CPU
+Whisper large-v3-turbo,7.43,64.52,90.91,13.75,3.67,1.82,0.1504,GPU
