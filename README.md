@@ -27,3 +27,7 @@ Search the file for `TODO` — there are three:
 
 - the GFLOP/s figure for the BLAS project, once measured,
 - the source repository link for the VS Code extension, once published.
+
+## Talk Mate case study
+
+`talk-mate/index.html` is the product case, with a responsive layout, shared portfolio theme preference, before/after results comparison and a keyboard-accessible screen viewer. `talk-mate/assets/` contains the English demo screenshots in WebP, the existing app icon, cover and Manrope font with its OFL licence. All app content shown is demonstration data. The case distinguishes research context, design hypotheses and pending user validation.
