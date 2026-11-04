@@ -369,16 +369,54 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
   html.js .reveal{opacity:1!important;transform:none!important;filter:none!important;transition:none}
 }
 
+/* ---------- trail strip: below 80rem the walk moves into a floating island at the bottom ---------- */
+@media (max-width:79.98rem){
+  body{padding-bottom:6rem}
+  .trail{display:block;position:fixed;z-index:30;left:0;right:0;bottom:.75rem;margin:0 auto;
+    width:calc(100% - 1.5rem);max-width:30rem;height:4.5rem;pointer-events:none;overflow:visible;
+    border-radius:1.25rem;background:var(--shell);border:1px solid var(--shell-ring);
+    backdrop-filter:blur(20px) saturate(1.6);-webkit-backdrop-filter:blur(20px) saturate(1.6);
+    box-shadow:var(--amb),var(--inset);opacity:0;transform:translateY(1.5rem);
+    transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .trail.on{opacity:1;transform:none}
+  .trail .stop{stroke-width:1}
+  .plane{width:60px;height:29px}
+  .bubble{font-size:.6875rem;padding:.4rem .65rem}
+}
+
 @media (max-width:48rem){
+  :root{--sec:4.5rem;--r-out:1.5rem;--r-in:calc(1.5rem - .3rem);--shell-pad:.3rem}
   body{overflow-x:hidden}
-  .stack{grid-template-columns:1fr}
-  .pill{max-width:100%;white-space:normal;letter-spacing:.14em}
-  .nav{padding-left:1rem;padding-right:1rem}
-  .nav-in{flex-direction:column;align-items:stretch;gap:.65rem;padding:.7rem .8rem;width:calc(100vw - 2rem);border-radius:1.25rem}
-  .mark{font-size:.8125rem;text-align:center}
+  .core{padding:1.4rem 1.2rem}
+  .sec-t{margin-bottom:1.75rem}
+  .hero{padding-top:2.75rem;gap:1.75rem}
+  .pill{max-width:100%;white-space:normal;letter-spacing:.12em;border-radius:1rem;margin-bottom:1.25rem}
+  .cta-row{margin-top:1.75rem}
+  .ident{grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem 1.25rem}
+  .ident>:last-child{grid-column:1 / -1}
+  .job h3{font-size:1.4rem}
+  .job-head{margin-bottom:.5rem}
+  .stack{gap:1rem 1.25rem}
+  .stack .v{overflow-wrap:anywhere}
+  .bar-row{grid-template-columns:4.5rem 1fr 2.75rem;gap:.75rem}
+  /* the focus diagram: a rail from the main question down to its two branches */
+  .focus{gap:1.5rem}
+  .f-side{position:relative;padding-left:1.4rem;gap:1.75rem}
+  .f-side::before{content:"";position:absolute;left:.3rem;top:-1rem;bottom:.6rem;width:1px;background:var(--ink-3);opacity:.5}
+  .f-side h3{position:relative}
+  .f-side h3::before{content:"";position:absolute;left:-1.4rem;top:.55em;width:.65rem;height:.65rem;border-radius:50%;
+    background:var(--core);border:1px solid var(--ink-3);box-sizing:border-box}
+  .xp-row + .xp-row{padding-top:1.25rem;border-top:1px solid var(--hair)}
+  .contact{padding-bottom:2rem}
+  .reach{gap:1rem 1.5rem;margin-top:2rem}
+  .reach .btn{order:-1;flex:0 0 100%;justify-content:space-between}
+  .nav{padding-left:.75rem;padding-right:.75rem;padding-top:.75rem}
+  .nav-in{position:relative;flex-direction:column;align-items:stretch;gap:.55rem;padding:.65rem .8rem .7rem;
+    width:calc(100vw - 1.5rem);border-radius:1.25rem}
+  .mark{font-size:.875rem;padding:.2rem 0 0 .15rem}
   .nav-links{flex:1;justify-content:space-between;gap:.35rem}
-  .nav-links a{font-size:.6875rem}
-  .tgl{display:none}
+  .nav-links a{font-size:.75rem;padding:.35rem 0}
+  .tgl{position:absolute;right:.55rem;top:.5rem;padding:.4rem .7rem;font-size:.625rem}
 }
 @media print{
   .nav,.tgl,.skip,.cta-row,.trail{display:none}
@@ -1105,7 +1143,7 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
       ys=[],marks=[],ready=false,mb=null,post=-1,reach=0,hand=null,
       read=0,readGoal=0,idleTimer=0,wave=0,waveStart=-1,waveClock=0,bubbleTimer=0,
       vel=0,flying=false,alpha=1,lastMove=0,fv=1,VMAX=900,
-      px=0,py=0,pvx=0,pvy=0,pdir=1,pitch=0,palpha=0;
+      px=0,py=0,pvx=0,pvy=0,pdir=1,pitch=0,palpha=0,narrow=false;
 
   // content box of an element in the coordinates of the trail layer; offsets ignore the reveal transforms
   function box(el,outer){
@@ -1148,11 +1186,56 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
     return Math.min(L,(lo+(y-ys[lo])/((ys[hi]-ys[lo])||1))*STEP);
   }
 
+  // narrow screens: a straight road in a floating island at the bottom of the screen; each section
+  // is a picture beside the road, and she walks right as the page scrolls down, ending at the mailbox
+  function strip(){
+    var W=trail.clientWidth,H=trail.clientHeight,ry=H-13,rw=7,IS=Math.min(.3,(H-26)/96),iw=120*IS,
+        top0=main.getBoundingClientRect().top+window.pageYOffset,vh=window.innerHeight,
+        max=Math.max(1,document.documentElement.scrollHeight-vh),x0=16;
+    gh=Math.round(H*.74);gw=gh*60/116;
+    walker.style.width=gw+"px";walker.style.height=gh+"px";
+    map.setAttribute("viewBox","0 0 "+W+" "+H);
+    iconsG.textContent="";stopsG.textContent="";marks=[];
+    var xe=W-x0-iw-gw/2-4,n=secs.length-1;
+    road.setAttribute("d","M"+x0+" "+ry+" L"+xe+" "+ry);lane.setAttribute("d","M"+x0+" "+ry+" L"+xe+" "+ry);
+    road.style.strokeWidth=rw+"px";
+    L=road.getTotalLength();
+    kf=[{s:0,l:0}];
+    for(var i=0;i<n;i++){
+      var el=secs[i+1],name=ICON[el.id],at=L*(i+1)/n;
+      if(name==="mail"){
+        // the mailbox stands just past the end of the road, mirrored so its door faces her
+        var ox=xe+gw/2+4+iw,oy=ry-rw/2-96*IS,g=icon("mail",0,0,1);
+        g.setAttribute("transform","translate("+ox.toFixed(1)+" "+oy.toFixed(1)+") scale("+(-IS)+" "+IS+")");
+        mb={g:g,door:g.querySelector(".mb-door"),flag:g.querySelector(".mb-flag"),env:g.querySelector(".mb-env"),ox:ox,oy:oy,kx:-IS,ky:IS};
+        g.classList.add("mailbox");
+        marks.push({len:L-2,dot:stop(xe,ry),pic:g,name:name});
+      }else{
+        // the picture stands behind the place where she stops for its section
+        var cx=x0+at-gw/2-iw/2-2;
+        marks.push({len:at-gw/2-iw/2,dot:stop(x0+at,ry),pic:icon(name,cx-iw/2,ry-rw/2-96*IS,IS),name:name});
+      }
+      // she reaches a section's stop as its heading comes into the lower half of the screen
+      kf.push({s:box(el).top+top0-vh*.55,l:name==="mail"?L:at});
+    }
+    kf.push({s:max,l:L});
+    for(var k=1;k<kf.length;k++){
+      kf[k].s=Math.min(Math.max(kf[k].s,kf[k-1].s+1),k===kf.length-1?Infinity:max-1);
+      kf[k].l=Math.max(kf[k].l,kf[k-1].l);
+    }
+    facing=fv=1;vel=0;flying=false;alpha=1;walker.style.opacity="";
+    palpha=0;plane.style.opacity=0;plane.classList.remove("flying");
+    post=-1;reach=0;hand=null;read=readGoal=0;idle();
+    readTarget();cur=-1;pose();kick();
+  }
+
   // a snake: down one margin beside a section, across the gap to the other margin, and so on
   function build(){
-    ready=wide.matches&&secs.length>1;
+    ready=secs.length>1;
     trail.classList.toggle("on",ready);
     if(!ready)return;
+    narrow=!wide.matches;
+    if(narrow){strip();return;}
     var W=trail.clientWidth,H=trail.clientHeight,sh=box(document.querySelector(".shell")),
         cL=sh.left,cR=sh.right,off=Math.min(64,cL/2),xL=cL-off,xR=cR+off,
         B=secs.map(function(el){return box(el);}),IW=120,IH=100;
@@ -1243,7 +1326,7 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
     var p=road.getPointAtLength(cur);
     // along a margin she faces the page (and her next turn); across a gap she faces where she walks
     var a=road.getPointAtLength(Math.max(0,cur-1.5)),b=road.getPointAtLength(Math.min(L,cur+1.5)),dx=b.x-a.x;
-    if(Math.abs(dx)<2.1)facing=p.x<trail.clientWidth/2?1:-1;
+    if(Math.abs(dx)<2.1){if(!narrow)facing=p.x<trail.clientWidth/2?1:-1;}
     else if(ds)facing=dx*(ds>0?1:-1)>0?1:-1;
     walker.style.transform="translate3d("+(p.x-gw/2).toFixed(1)+"px,"+(p.y-gh*112.6/116).toFixed(1)+"px,0)";
     bubble.style.left=p.x.toFixed(1)+"px";bubble.style.top=(p.y-gh-6).toFixed(1)+"px";
@@ -1317,7 +1400,7 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
     if(first||still){step=target-Math.max(cur,0);cur=target;vel=0;jump=first;}
     else{
       var gap=target-cur;
-      if(!flying&&Math.abs(gap)>Math.max(360,window.innerHeight*.4)){
+      if(!flying&&Math.abs(gap)>(narrow?L*.3:Math.max(360,window.innerHeight*.4))){
         // too fast to walk: she takes off from where she is
         var q=road.getPointAtLength(cur);
         flying=true;px=q.x;py=q.y-gh*.55;pvx=pvy=0;plane.classList.add("flying");bubble.classList.remove("on");
@@ -1344,7 +1427,7 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
       palpha=flying?Math.min(1,palpha+dt/150):Math.max(0,palpha-dt/220);
       walker.style.opacity=alpha<1?alpha.toFixed(3):"";
       plane.style.opacity=palpha.toFixed(3);
-      if(palpha>0)plane.style.transform="translate3d("+(px-42).toFixed(1)+"px,"+(py-20).toFixed(1)+"px,0)"+
+      if(palpha>0)plane.style.transform="translate3d("+(px-(narrow?30:42)).toFixed(1)+"px,"+(py-(narrow?14.5:20)).toFixed(1)+"px,0)"+
         (pdir<0?" scaleX(-1)":"")+" rotate("+pitch.toFixed(1)+"deg)";
     }
     place(jump?1:step);
