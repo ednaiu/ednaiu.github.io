@@ -17,21 +17,21 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <style>
 :root{
-  --ground:#EFF1F3;
-  --shell:rgba(255,255,255,.55);
-  --shell-ring:rgba(16,18,22,.06);
-  --core:#FBFCFD;
-  --ink:#111316;
-  --ink-2:#565B62;
-  --ink-3:#878D95;
-  --ink-read:#3D4249;
-  --hair:rgba(16,18,22,.07);
-  --link:#1A4FA0;
-  --good:#1B7A4B;
-  --mark-n:#8A929B;
+  --ground:#F5F8FD;
+  --shell:rgba(255,255,255,.6);
+  --shell-ring:rgba(11,27,58,.08);
+  --core:rgba(255,255,255,.92);
+  --ink:#0B1B3A;
+  --ink-2:#4B5B78;
+  --ink-3:#8794AB;
+  --ink-read:#2C3B58;
+  --hair:rgba(11,27,58,.08);
+  --link:#2350E0;
+  --good:#167A4A;
+  --mark-n:#8794AB;
   --mark-bad:#A8412F;
   --focus:#1F6FEB;
-  --amb:0 1px 2px rgba(16,18,22,.04), 0 10px 30px -12px rgba(16,18,22,.10), 0 30px 70px -30px rgba(16,18,22,.14);
+  --amb:0 1px 2px rgba(11,27,58,.05), 0 10px 30px -12px rgba(11,27,58,.12), 0 30px 70px -30px rgba(11,27,58,.16);
   --inset:inset 0 1px 0 rgba(255,255,255,.9);
 
   --f-sans:"IBM Plex Sans","Segoe UI",sans-serif;
@@ -47,18 +47,18 @@
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --ground:#0A0B0D;
-    --shell:rgba(255,255,255,.045);
-    --shell-ring:rgba(255,255,255,.09);
-    --core:#131519;
-    --ink:#ECEEF1;
-    --ink-2:#9AA1A9;
-    --ink-3:#737A82;
-    --ink-read:#BCC2C9;
-    --hair:rgba(255,255,255,.08);
-    --link:#8CB8F7;
+    --ground:#0A1120;
+    --shell:rgba(190,212,255,.05);
+    --shell-ring:rgba(190,212,255,.1);
+    --core:#111A2B;
+    --ink:#E8EEF8;
+    --ink-2:#9AA8BF;
+    --ink-3:#6F7D94;
+    --ink-read:#C2CDDE;
+    --hair:rgba(190,212,255,.09);
+    --link:#8DB4FF;
     --good:#5CC48F;
-    --mark-n:#6B737C;
+    --mark-n:#66748A;
     --mark-bad:#E08A72;
     --focus:#5C9DFF;
     --amb:0 1px 2px rgba(0,0,0,.5), 0 14px 40px -14px rgba(0,0,0,.7);
@@ -66,9 +66,9 @@
   }
 }
 :root[data-theme="dark"]{
-  --ground:#0A0B0D; --shell:rgba(255,255,255,.045); --shell-ring:rgba(255,255,255,.09);
-  --core:#131519; --ink:#ECEEF1; --ink-2:#9AA1A9; --ink-3:#737A82; --ink-read:#BCC2C9; --hair:rgba(255,255,255,.08);
-  --link:#8CB8F7; --good:#5CC48F; --mark-n:#6B737C; --mark-bad:#E08A72; --focus:#5C9DFF;
+  --ground:#0A1120; --shell:rgba(190,212,255,.05); --shell-ring:rgba(190,212,255,.1);
+  --core:#111A2B; --ink:#E8EEF8; --ink-2:#9AA8BF; --ink-3:#6F7D94; --ink-read:#C2CDDE; --hair:rgba(190,212,255,.09);
+  --link:#8DB4FF; --good:#5CC48F; --mark-n:#66748A; --mark-bad:#E08A72; --focus:#5C9DFF;
   --amb:0 1px 2px rgba(0,0,0,.5), 0 14px 40px -14px rgba(0,0,0,.7);
   --inset:inset 0 1px 0 rgba(255,255,255,.06);
 }
@@ -78,6 +78,14 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--ground);color:var(--ink);
   font:400 16px/1.65 var(--f-sans);-webkit-font-smoothing:antialiased}
+/* light theme: blue light from the top of the screen and a fine grain; fixed layers so phones keep it in place */
+body::before,body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none}
+body::before{background:linear-gradient(180deg,#CFDDF6 0%,#E6EDF9 28%,#F5F8FD 60%)}
+body::after{opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body::before,:root:not([data-theme="light"]) body::after{display:none}}
+:root[data-theme="dark"] body::before,:root[data-theme="dark"] body::after{display:none}
+@media print{body::before,body::after{display:none}}
 h1,h2,h3{margin:0;text-wrap:balance}
 p{margin:0}
 a{color:inherit}
