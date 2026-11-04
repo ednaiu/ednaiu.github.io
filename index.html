@@ -24,6 +24,7 @@
   --ink:#111316;
   --ink-2:#565B62;
   --ink-3:#878D95;
+  --ink-read:#3D4249;
   --hair:rgba(16,18,22,.07);
   --link:#1A4FA0;
   --good:#1B7A4B;
@@ -53,6 +54,7 @@
     --ink:#ECEEF1;
     --ink-2:#9AA1A9;
     --ink-3:#737A82;
+    --ink-read:#BCC2C9;
     --hair:rgba(255,255,255,.08);
     --link:#8CB8F7;
     --good:#5CC48F;
@@ -65,7 +67,7 @@
 }
 :root[data-theme="dark"]{
   --ground:#0A0B0D; --shell:rgba(255,255,255,.045); --shell-ring:rgba(255,255,255,.09);
-  --core:#131519; --ink:#ECEEF1; --ink-2:#9AA1A9; --ink-3:#737A82; --hair:rgba(255,255,255,.08);
+  --core:#131519; --ink:#ECEEF1; --ink-2:#9AA1A9; --ink-3:#737A82; --ink-read:#BCC2C9; --hair:rgba(255,255,255,.08);
   --link:#8CB8F7; --good:#5CC48F; --mark-n:#6B737C; --mark-bad:#E08A72; --focus:#5C9DFF;
   --amb:0 1px 2px rgba(0,0,0,.5), 0 14px 40px -14px rgba(0,0,0,.7);
   --inset:inset 0 1px 0 rgba(255,255,255,.06);
@@ -371,9 +373,9 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
 
 /* ---------- trail strip: below 80rem the walk moves into a floating island at the bottom ---------- */
 @media (max-width:79.98rem){
-  body{padding-bottom:6rem}
+  body{padding-bottom:5rem}
   .trail{display:block;position:fixed;z-index:30;left:0;right:0;bottom:.75rem;margin:0 auto;
-    width:calc(100% - 1.5rem);max-width:30rem;height:4.5rem;pointer-events:none;overflow:visible;
+    width:calc(100% - 1.5rem);max-width:30rem;height:3.75rem;pointer-events:none;overflow:visible;
     border-radius:1.25rem;background:var(--shell);border:1px solid var(--shell-ring);
     backdrop-filter:blur(20px) saturate(1.6);-webkit-backdrop-filter:blur(20px) saturate(1.6);
     box-shadow:var(--amb),var(--inset);opacity:0;transform:translateY(1.5rem);
@@ -385,9 +387,18 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
 }
 
 @media (max-width:48rem){
-  :root{--sec:4.5rem;--r-out:1.5rem;--r-in:calc(1.5rem - .3rem);--shell-pad:.3rem}
+  :root{--sec:3.5rem;--r-out:1.5rem;--r-in:calc(1.5rem - .3rem);--shell-pad:.3rem}
   body{overflow-x:hidden}
-  .core{padding:1.4rem 1.2rem}
+  .shell{padding:0 1rem}
+  /* reading on a phone: one flat card instead of the double bezel, darker and larger body text */
+  .bez{padding:0;background:none;border:0;box-shadow:none}
+  .bez + .bez{margin-top:1rem}
+  .core{padding:1.4rem 1.15rem;border-radius:1.25rem;border:1px solid var(--shell-ring);box-shadow:var(--amb),var(--inset)}
+  .job p,.xp-what p,.deg p,.f-side p,.chart-s,.chart-note,.contact p{font-size:1rem;line-height:1.62;color:var(--ink-read)}
+  .hero .sub{color:var(--ink-read)}
+  .cred,.xp-co,.deg .m{font-family:var(--f-sans);font-size:.875rem;line-height:1.5}
+  .cred .grade{font-size:1rem}
+  .chart-t{font-family:var(--f-sans);font-weight:600;font-size:.9375rem}
   .sec-t{margin-bottom:1.75rem}
   .hero{padding-top:2.75rem;gap:1.75rem}
   .pill{max-width:100%;white-space:normal;letter-spacing:.12em;border-radius:1rem;margin-bottom:1.25rem}
@@ -410,13 +421,17 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
   .contact{padding-bottom:2rem}
   .reach{gap:1rem 1.5rem;margin-top:2rem}
   .reach .btn{order:-1;flex:0 0 100%;justify-content:space-between}
-  .nav{padding-left:.75rem;padding-right:.75rem;padding-top:.75rem}
-  .nav-in{position:relative;flex-direction:column;align-items:stretch;gap:.55rem;padding:.65rem .8rem .7rem;
-    width:calc(100vw - 1.5rem);border-radius:1.25rem}
-  .mark{font-size:.875rem;padding:.2rem 0 0 .15rem}
-  .nav-links{flex:1;justify-content:space-between;gap:.35rem}
-  .nav-links a{font-size:.75rem;padding:.35rem 0}
-  .tgl{position:absolute;right:.55rem;top:.5rem;padding:.4rem .7rem;font-size:.625rem}
+  /* the bar: name and theme on one line, sections on the next, both on the same left edge;
+     it slides away while the page scrolls down and comes back on the way up */
+  .nav{padding:.6rem .75rem 0;transition:transform .5s var(--ease)}
+  .nav.away{transform:translateY(calc(-100% - .5rem))}
+  .nav:focus-within{transform:none}
+  .nav-in{display:grid;grid-template-columns:1fr auto;align-items:center;gap:.35rem .5rem;
+    width:100%;padding:.5rem .55rem .45rem 1rem;border-radius:1.1rem}
+  .mark{font-size:.875rem}
+  .tgl{grid-row:1;grid-column:2;padding:.35rem .65rem;font-size:.625rem}
+  .nav-links{grid-row:2;grid-column:1 / -1;justify-content:space-between;gap:.5rem;padding-right:.45rem}
+  .nav-links a{font-size:.75rem;padding:.3rem 0}
 }
 @media print{
   .nav,.tgl,.skip,.cta-row,.trail{display:none}
@@ -478,8 +493,8 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
       <a href="#work" data-analytics-click="view-work" data-analytics-title="View research projects">Research</a>
       <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
-      <button class="tgl" id="theme" type="button" aria-label="Switch colour theme">theme</button>
     </nav>
+    <button class="tgl" id="theme" type="button" aria-label="Switch colour theme">theme</button>
   </div>
 </header>
 
@@ -1092,6 +1107,19 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
     root.setAttribute("data-theme",next);
     try{localStorage.setItem(KEY,next);}catch(e){}
   });
+})();
+</script>
+<script>
+// on phones the bar leaves while the page scrolls down and returns as soon as it scrolls up
+(function(){
+  var nav=document.querySelector(".nav"),phone=window.matchMedia("(max-width: 48rem)"),last=window.pageYOffset;
+  window.addEventListener("scroll",function(){
+    var y=window.pageYOffset;
+    if(!phone.matches){nav.classList.remove("away");last=y;return;}
+    if(Math.abs(y-last)<10)return;
+    nav.classList.toggle("away",y>last&&y>160);
+    last=y;
+  },{passive:true});
 })();
 </script>
 <script>
