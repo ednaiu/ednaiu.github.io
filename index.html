@@ -380,7 +380,7 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
     backdrop-filter:blur(20px) saturate(1.6);-webkit-backdrop-filter:blur(20px) saturate(1.6);
     box-shadow:var(--amb),var(--inset);opacity:0;transform:translateY(1.5rem);
     transition:opacity .7s var(--ease),transform .7s var(--ease)}
-  .trail.on{opacity:1;transform:none}
+  .trail.on{opacity:1;transform:none;pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent}
   .trail .stop{stroke-width:1}
   .plane{width:60px;height:29px}
   .bubble{font-size:.6875rem;padding:.4rem .65rem}
@@ -1241,11 +1241,11 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
         g.setAttribute("transform","translate("+ox.toFixed(1)+" "+oy.toFixed(1)+") scale("+(-IS)+" "+IS+")");
         mb={g:g,door:g.querySelector(".mb-door"),flag:g.querySelector(".mb-flag"),env:g.querySelector(".mb-env"),ox:ox,oy:oy,kx:-IS,ky:IS};
         g.classList.add("mailbox");
-        marks.push({len:L-2,dot:stop(xe,ry),pic:g,name:name});
+        marks.push({len:L-2,dot:stop(xe,ry),pic:g,name:name,x:ox-iw/2,el:el});
       }else{
         // the picture stands behind the place where she stops for its section
         var cx=x0+at-gw/2-iw/2-2;
-        marks.push({len:at-gw/2-iw/2,dot:stop(x0+at,ry),pic:icon(name,cx-iw/2,ry-rw/2-96*IS,IS),name:name});
+        marks.push({len:at-gw/2-iw/2,dot:stop(x0+at,ry),pic:icon(name,cx-iw/2,ry-rw/2-96*IS,IS),name:name,x:cx,el:el});
       }
       // she reaches a section's stop as its heading comes into the lower half of the screen
       kf.push({s:box(el).top+top0-vh*.55,l:name==="mail"?L:at});
@@ -1490,7 +1490,12 @@ html.js .reveal.in{opacity:1;transform:none;filter:none}
   walker.addEventListener("click",hello);
   // a click on the mailbox, while she stands beside it, posts another letter
   trail.addEventListener("click",function(e){
-    if(mb&&mb.g.contains(e.target)&&cur>=L-2&&post<0){mailboxReset();readGoal=0;idle();kick();}
+    if(mb&&mb.g.contains(e.target)&&cur>=L-2&&post<0){mailboxReset();readGoal=0;idle();kick();return;}
+    // on the strip a tap on a picture (or near it) takes the page to its section, and she walks or flies there
+    if(!narrow||walker.contains(e.target))return;
+    var r=trail.getBoundingClientRect(),x=e.clientX-r.left,best=null,d=1e9;
+    marks.forEach(function(m){var k=Math.abs(m.x-x);if(k<d){d=k;best=m;}});
+    if(best&&d<40)best.el.scrollIntoView({behavior:still?"auto":"smooth",block:"start"});
   });
   window.addEventListener("resize",build);
   window.addEventListener("load",build);
